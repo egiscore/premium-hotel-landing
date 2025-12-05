@@ -15,7 +15,11 @@ const hotels = [
     gallery: [
       'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
       'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
-      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg'
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/a0c9aea2-5dc6-4d14-a219-0072e564aa6f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/5c7f4c61-4f62-4990-baa9-12a6ad198f52.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/bb0bf83f-561a-406f-8061-0ad6d1b4535b.jpg'
     ]
   },
   {
@@ -24,7 +28,16 @@ const hotels = [
     location: 'Центр Москвы',
     price: '38 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/a0c9aea2-5dc6-4d14-a219-0072e564aa6f.jpg',
-    features: ['5 звёзд', 'Бутик-отель', 'VIP-зона']
+    features: ['5 звёзд', 'Бутик-отель', 'VIP-зона'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/a0c9aea2-5dc6-4d14-a219-0072e564aa6f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/5c7f4c61-4f62-4990-baa9-12a6ad198f52.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/bb0bf83f-561a-406f-8061-0ad6d1b4535b.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/03f18061-13fd-42bf-8b8d-ce82c6e44378.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7c559f3c-f820-4757-9913-7c0a1a9aabc4.jpg'
+    ]
   },
   {
     id: 3,
@@ -32,7 +45,16 @@ const hotels = [
     location: 'Москва-Сити',
     price: '52 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg',
-    features: ['Апартаменты люкс', 'Панорамный вид', 'Консьерж 24/7']
+    features: ['Апартаменты люкс', 'Панорамный вид', 'Консьерж 24/7'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4e1925ad-dc5f-4493-b3a3-a84a65da04ef.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/796369cd-2d4f-44a3-8c48-33ecde17dce3.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/f4351dfc-af0a-40ca-af7b-5d16bd226665.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/78a59793-8126-4de6-84a1-177d1257ff6a.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3331b63b-c5a0-4698-a0ff-2150dc7142f1.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7d964120-5bfe-447b-acdc-618c8763ef31.jpg'
+    ]
   },
   {
     id: 4,
@@ -40,7 +62,16 @@ const hotels = [
     location: 'Патриаршие пруды',
     price: '62 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/5c7f4c61-4f62-4990-baa9-12a6ad198f52.jpg',
-    features: ['Исторический особняк', 'Винный погреб', 'Библиотека и камин']
+    features: ['Исторический особняк', 'Винный погреб', 'Библиотека и камин'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/5c7f4c61-4f62-4990-baa9-12a6ad198f52.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/6c07f5f4-4077-4f7a-9c3b-9b6128b75a8c.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4193a67b-3fb4-4b82-aef8-b88d41ac408f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3c835bb4-38a9-4781-bebc-44e5043cb98f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7435c9a6-7696-43ad-a85c-1e0ea674083e.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2eb3e6b5-57ab-4089-9e31-c1a63feac6d0.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg'
+    ]
   },
   {
     id: 5,
@@ -48,7 +79,16 @@ const hotels = [
     location: 'Кутузовский проспект',
     price: '48 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/bb0bf83f-561a-406f-8061-0ad6d1b4535b.jpg',
-    features: ['Панорамные окна', 'Фитнес-клуб', 'Крытый бассейн']
+    features: ['Панорамные окна', 'Фитнес-клуб', 'Крытый бассейн'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/bb0bf83f-561a-406f-8061-0ad6d1b4535b.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/a0c9aea2-5dc6-4d14-a219-0072e564aa6f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/5c7f4c61-4f62-4990-baa9-12a6ad198f52.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/03f18061-13fd-42bf-8b8d-ce82c6e44378.jpg'
+    ]
   },
   {
     id: 6,
@@ -56,7 +96,16 @@ const hotels = [
     location: 'Замоскворечье',
     price: '42 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/03f18061-13fd-42bf-8b8d-ce82c6e44378.jpg',
-    features: ['Парковая зона', 'Терраса на крыше', 'Michelin ресторан']
+    features: ['Парковая зона', 'Терраса на крыше', 'Michelin ресторан'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/03f18061-13fd-42bf-8b8d-ce82c6e44378.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7c559f3c-f820-4757-9913-7c0a1a9aabc4.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4e1925ad-dc5f-4493-b3a3-a84a65da04ef.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/796369cd-2d4f-44a3-8c48-33ecde17dce3.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/f4351dfc-af0a-40ca-af7b-5d16bd226665.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/78a59793-8126-4de6-84a1-177d1257ff6a.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3331b63b-c5a0-4698-a0ff-2150dc7142f1.jpg'
+    ]
   },
   {
     id: 7,
@@ -64,7 +113,16 @@ const hotels = [
     location: 'Остоженка',
     price: '55 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7c559f3c-f820-4757-9913-7c0a1a9aabc4.jpg',
-    features: ['Дизайнерские интерьеры', 'Арт-галерея', 'Сигарная комната']
+    features: ['Дизайнерские интерьеры', 'Арт-галерея', 'Сигарная комната'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7c559f3c-f820-4757-9913-7c0a1a9aabc4.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7d964120-5bfe-447b-acdc-618c8763ef31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/6c07f5f4-4077-4f7a-9c3b-9b6128b75a8c.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4193a67b-3fb4-4b82-aef8-b88d41ac408f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3c835bb4-38a9-4781-bebc-44e5043cb98f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7435c9a6-7696-43ad-a85c-1e0ea674083e.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2eb3e6b5-57ab-4089-9e31-c1a63feac6d0.jpg'
+    ]
   },
   {
     id: 8,
@@ -72,7 +130,16 @@ const hotels = [
     location: 'Рублёвское шоссе',
     price: '68 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4e1925ad-dc5f-4493-b3a3-a84a65da04ef.jpg',
-    features: ['Загородный комплекс', 'Конюшня и верховая езда', 'Частный пляж']
+    features: ['Загородный комплекс', 'Конюшня и верховая езда', 'Частный пляж'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4e1925ad-dc5f-4493-b3a3-a84a65da04ef.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/a0c9aea2-5dc6-4d14-a219-0072e564aa6f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/5c7f4c61-4f62-4990-baa9-12a6ad198f52.jpg'
+    ]
   },
   {
     id: 9,
@@ -80,7 +147,16 @@ const hotels = [
     location: 'Чистые пруды',
     price: '41 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/796369cd-2d4f-44a3-8c48-33ecde17dce3.jpg',
-    features: ['Антикварная мебель', 'Камерная атмосфера', 'Домашний кинотеатр']
+    features: ['Антикварная мебель', 'Камерная атмосфера', 'Домашний кинотеатр'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/796369cd-2d4f-44a3-8c48-33ecde17dce3.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/bb0bf83f-561a-406f-8061-0ad6d1b4535b.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/03f18061-13fd-42bf-8b8d-ce82c6e44378.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7c559f3c-f820-4757-9913-7c0a1a9aabc4.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4e1925ad-dc5f-4493-b3a3-a84a65da04ef.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/f4351dfc-af0a-40ca-af7b-5d16bd226665.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/78a59793-8126-4de6-84a1-177d1257ff6a.jpg'
+    ]
   },
   {
     id: 10,
@@ -88,7 +164,16 @@ const hotels = [
     location: 'Пресненская набережная',
     price: '72 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/f4351dfc-af0a-40ca-af7b-5d16bd226665.jpg',
-    features: ['Пентхаусы премиум', 'Вертолётная площадка', 'Личный шеф-повар']
+    features: ['Пентхаусы премиум', 'Вертолётная площадка', 'Личный шеф-повар'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/f4351dfc-af0a-40ca-af7b-5d16bd226665.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3331b63b-c5a0-4698-a0ff-2150dc7142f1.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7d964120-5bfe-447b-acdc-618c8763ef31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/6c07f5f4-4077-4f7a-9c3b-9b6128b75a8c.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4193a67b-3fb4-4b82-aef8-b88d41ac408f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3c835bb4-38a9-4781-bebc-44e5043cb98f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7435c9a6-7696-43ad-a85c-1e0ea674083e.jpg'
+    ]
   },
   {
     id: 11,
@@ -96,7 +181,16 @@ const hotels = [
     location: 'Сретенский бульвар',
     price: '58 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/78a59793-8126-4de6-84a1-177d1257ff6a.jpg',
-    features: ['Особняк XIX века', 'Мраморный холл', 'Коллекция живописи']
+    features: ['Особняк XIX века', 'Мраморный холл', 'Коллекция живописи'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/78a59793-8126-4de6-84a1-177d1257ff6a.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2eb3e6b5-57ab-4089-9e31-c1a63feac6d0.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/a0c9aea2-5dc6-4d14-a219-0072e564aa6f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg'
+    ]
   },
   {
     id: 12,
@@ -104,7 +198,16 @@ const hotels = [
     location: 'Маросейка',
     price: '46 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3331b63b-c5a0-4698-a0ff-2150dc7142f1.jpg',
-    features: ['Барокко интерьеры', 'Спа с хаммамом', 'Бутик-отель 12 номеров']
+    features: ['Барокко интерьеры', 'Спа с хаммамом', 'Бутик-отель 12 номеров'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3331b63b-c5a0-4698-a0ff-2150dc7142f1.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/5c7f4c61-4f62-4990-baa9-12a6ad198f52.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/bb0bf83f-561a-406f-8061-0ad6d1b4535b.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/03f18061-13fd-42bf-8b8d-ce82c6e44378.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7c559f3c-f820-4757-9913-7c0a1a9aabc4.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4e1925ad-dc5f-4493-b3a3-a84a65da04ef.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/796369cd-2d4f-44a3-8c48-33ecde17dce3.jpg'
+    ]
   },
   {
     id: 13,
@@ -112,7 +215,16 @@ const hotels = [
     location: 'Воробьёвы горы',
     price: '65 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7d964120-5bfe-447b-acdc-618c8763ef31.jpg',
-    features: ['Панорама на Москву-реку', 'Infinity бассейн', 'Michelin гастрономия']
+    features: ['Панорама на Москву-реку', 'Infinity бассейн', 'Michelin гастрономия'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7d964120-5bfe-447b-acdc-618c8763ef31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/f4351dfc-af0a-40ca-af7b-5d16bd226665.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/78a59793-8126-4de6-84a1-177d1257ff6a.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3331b63b-c5a0-4698-a0ff-2150dc7142f1.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/6c07f5f4-4077-4f7a-9c3b-9b6128b75a8c.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4193a67b-3fb4-4b82-aef8-b88d41ac408f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3c835bb4-38a9-4781-bebc-44e5043cb98f.jpg'
+    ]
   },
   {
     id: 14,
@@ -120,7 +232,16 @@ const hotels = [
     location: 'Поварская улица',
     price: '53 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/6c07f5f4-4077-4f7a-9c3b-9b6128b75a8c.jpg',
-    features: ['Дворянская усадьба', 'Частный двор-сад', 'Камины в номерах']
+    features: ['Дворянская усадьба', 'Частный двор-сад', 'Камины в номерах'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/6c07f5f4-4077-4f7a-9c3b-9b6128b75a8c.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7435c9a6-7696-43ad-a85c-1e0ea674083e.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2eb3e6b5-57ab-4089-9e31-c1a63feac6d0.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/a0c9aea2-5dc6-4d14-a219-0072e564aa6f.jpg'
+    ]
   },
   {
     id: 15,
@@ -128,7 +249,16 @@ const hotels = [
     location: 'Серебряный Бор',
     price: '75 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4193a67b-3fb4-4b82-aef8-b88d41ac408f.jpg',
-    features: ['Лесопарковая зона', 'Частный причал', 'Эко-веллнес центр']
+    features: ['Лесопарковая зона', 'Частный причал', 'Эко-веллнес центр'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4193a67b-3fb4-4b82-aef8-b88d41ac408f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/5c7f4c61-4f62-4990-baa9-12a6ad198f52.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/bb0bf83f-561a-406f-8061-0ad6d1b4535b.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/03f18061-13fd-42bf-8b8d-ce82c6e44378.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7c559f3c-f820-4757-9913-7c0a1a9aabc4.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4e1925ad-dc5f-4493-b3a3-a84a65da04ef.jpg'
+    ]
   },
   {
     id: 16,
@@ -136,7 +266,16 @@ const hotels = [
     location: 'Большая Никитская',
     price: '61 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3c835bb4-38a9-4781-bebc-44e5043cb98f.jpg',
-    features: ['Люксовая классика', 'Библиотека с редкими изданиями', 'Личный сомелье']
+    features: ['Люксовая классика', 'Библиотека с редкими изданиями', 'Личный сомелье'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3c835bb4-38a9-4781-bebc-44e5043cb98f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/796369cd-2d4f-44a3-8c48-33ecde17dce3.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/f4351dfc-af0a-40ca-af7b-5d16bd226665.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/78a59793-8126-4de6-84a1-177d1257ff6a.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/3331b63b-c5a0-4698-a0ff-2150dc7142f1.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7d964120-5bfe-447b-acdc-618c8763ef31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/6c07f5f4-4077-4f7a-9c3b-9b6128b75a8c.jpg'
+    ]
   },
   {
     id: 17,
@@ -144,7 +283,16 @@ const hotels = [
     location: 'Золотые ключи',
     price: '70 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7435c9a6-7696-43ad-a85c-1e0ea674083e.jpg',
-    features: ['Панорамные люксы', 'SPA с видом на Кремль', 'Бутлерский сервис']
+    features: ['Панорамные люксы', 'SPA с видом на Кремль', 'Бутлерский сервис'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7435c9a6-7696-43ad-a85c-1e0ea674083e.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4193a67b-3fb4-4b82-aef8-b88d41ac408f.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2eb3e6b5-57ab-4089-9e31-c1a63feac6d0.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/a0c9aea2-5dc6-4d14-a219-0072e564aa6f.jpg'
+    ]
   },
   {
     id: 18,
@@ -152,7 +300,16 @@ const hotels = [
     location: 'Крымский вал',
     price: '49 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2eb3e6b5-57ab-4089-9e31-c1a63feac6d0.jpg',
-    features: ['Парк Горького рядом', 'Терраса с видом', 'Йога-студия на крыше']
+    features: ['Парк Горького рядом', 'Терраса с видом', 'Йога-студия на крыше'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2eb3e6b5-57ab-4089-9e31-c1a63feac6d0.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/5c7f4c61-4f62-4990-baa9-12a6ad198f52.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/bb0bf83f-561a-406f-8061-0ad6d1b4535b.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/03f18061-13fd-42bf-8b8d-ce82c6e44378.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/7c559f3c-f820-4757-9913-7c0a1a9aabc4.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/4e1925ad-dc5f-4493-b3a3-a84a65da04ef.jpg'
+    ]
   }
 ];
 
