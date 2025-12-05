@@ -75,6 +75,78 @@ const hotels = [
     price: '41 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/d743b16f-8265-4a09-a059-652f9c042f19.jpg',
     features: ['Антикварная мебель', 'Камерная атмосфера', 'Домашний кинотеатр']
+  },
+  {
+    id: 10,
+    name: 'Platinum Prestige',
+    location: 'Пресненская набережная',
+    price: '72 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+    features: ['Пентхаусы премиум', 'Вертолётная площадка', 'Личный шеф-повар']
+  },
+  {
+    id: 11,
+    name: 'Renaissance Mansion',
+    location: 'Сретенский бульвар',
+    price: '58 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+    features: ['Особняк XIX века', 'Мраморный холл', 'Коллекция живописи']
+  },
+  {
+    id: 12,
+    name: 'Velvet Suite',
+    location: 'Маросейка',
+    price: '46 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/d743b16f-8265-4a09-a059-652f9c042f19.jpg',
+    features: ['Барокко интерьеры', 'Спа с хаммамом', 'Бутик-отель 12 номеров']
+  },
+  {
+    id: 13,
+    name: 'Diamond Heights',
+    location: 'Воробьёвы горы',
+    price: '65 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+    features: ['Панорама на Москву-реку', 'Infinity бассейн', 'Michelin гастрономия']
+  },
+  {
+    id: 14,
+    name: 'Noble Residence',
+    location: 'Поварская улица',
+    price: '53 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+    features: ['Дворянская усадьба', 'Частный двор-сад', 'Камины в номерах']
+  },
+  {
+    id: 15,
+    name: 'Emerald Park Hotel',
+    location: 'Серебряный Бор',
+    price: '75 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+    features: ['Лесопарковая зона', 'Частный причал', 'Эко-веллнес центр']
+  },
+  {
+    id: 16,
+    name: 'Marquis Collection',
+    location: 'Большая Никитская',
+    price: '61 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/d743b16f-8265-4a09-a059-652f9c042f19.jpg',
+    features: ['Люксовая классика', 'Библиотека с редкими изданиями', 'Личный сомелье']
+  },
+  {
+    id: 17,
+    name: 'Aurora Sky Suites',
+    location: 'Золотые ключи',
+    price: '70 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+    features: ['Панорамные люксы', 'SPA с видом на Кремль', 'Бутлерский сервис']
+  },
+  {
+    id: 18,
+    name: 'Imperial Garden',
+    location: 'Крымский вал',
+    price: '49 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+    features: ['Парк Горького рядом', 'Терраса с видом', 'Йога-студия на крыше']
   }
 ];
 
@@ -82,12 +154,13 @@ const HotelCatalog = () => {
   const [selectedLocation, setSelectedLocation] = useState('Все');
   const [priceRange, setPriceRange] = useState('Все');
 
-  const locations = ['Все', 'Центр Москвы', 'Тверская улица', 'Москва-Сити', 'Патриаршие пруды', 'Кутузовский проспект', 'Замоскворечье', 'Остоженка', 'Рублёвское шоссе', 'Чистые пруды'];
+  const locations = ['Все', 'Центр Москвы', 'Тверская улица', 'Москва-Сити', 'Патриаршие пруды', 'Кутузовский проспект', 'Замоскворечье', 'Остоженка', 'Рублёвское шоссе', 'Чистые пруды', 'Пресненская набережная', 'Сретенский бульвар', 'Маросейка', 'Воробьёвы горы', 'Поварская улица', 'Серебряный Бор', 'Большая Никитская', 'Золотые ключи', 'Крымский вал'];
   const priceRanges = [
     { label: 'Все', min: 0, max: Infinity },
     { label: 'До 45 000 ₽', min: 0, max: 45000 },
     { label: '45 000 - 55 000 ₽', min: 45000, max: 55000 },
-    { label: 'От 55 000 ₽', min: 55000, max: Infinity }
+    { label: '55 000 - 65 000 ₽', min: 55000, max: 65000 },
+    { label: 'От 65 000 ₽', min: 65000, max: Infinity }
   ];
 
   const filteredHotels = hotels.filter(hotel => {
