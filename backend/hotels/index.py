@@ -74,10 +74,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             location = body_data.get('location', '').replace("'", "''")
             price = body_data.get('price', 0)
             image_url = body_data.get('image_url', '').replace("'", "''")
-            features = json.dumps(body_data.get('features', [])).replace("'", "''")
+            features_list = body_data.get('features', [])
+            features_str = ','.join([f"'{f.replace(chr(39), chr(39)+chr(39))}'" for f in features_list])
+            features_array = '{' + features_str + '}'
             
             cur.execute(
-                f"INSERT INTO hotels (name, location, price, image_url, features) VALUES ('{name}', '{location}', {price}, '{image_url}', '{features}') RETURNING *"
+                f"INSERT INTO hotels (name, location, price, image_url, features) VALUES ('{name}', '{location}', {price}, '{image_url}', ARRAY[{features_str}]::text[]) RETURNING *"
             )
             conn.commit()
             new_hotel = cur.fetchone()
@@ -101,10 +103,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             location = body_data.get('location', '').replace("'", "''")
             price = body_data.get('price', 0)
             image_url = body_data.get('image_url', '').replace("'", "''")
-            features = json.dumps(body_data.get('features', [])).replace("'", "''")
+            features_list = body_data.get('features', [])
+            features_str = ','.join([f"'{f.replace(chr(39), chr(39)+chr(39))}'" for f in features_list])
             
             cur.execute(
-                f"UPDATE hotels SET name = '{name}', location = '{location}', price = {price}, image_url = '{image_url}', features = '{features}', updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id} RETURNING *"
+                f"UPDATE hotels SET name = '{name}', location = '{location}', price = {price}, image_url = '{image_url}', features = ARRAY[{features_str}]::text[], updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id} RETURNING *"
             )
             conn.commit()
             updated_hotel = cur.fetchone()
