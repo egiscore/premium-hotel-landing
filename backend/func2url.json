@@ -1,4 +1,7 @@
 {
+  "hotels": "https://functions.poehali.dev/82ea708f-5e97-4f6c-87b6-720c95d9d5db",
+  "auth": "https://functions.poehali.dev/dbebc829-69b9-4540-b823-4ccb6056efd7",
+  "content": "https://functions.poehali.dev/9060a72f-0e7c-4252-ba69-f0e562211c8e",
   "admin": "https://functions.poehali.dev/d7ec4198-c892-4d40-90a7-6b891932711b",
   "send-email": "https://functions.poehali.dev/dfa9e878-6ce1-4e00-926b-dea259794eb6"
 }
