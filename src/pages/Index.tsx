@@ -1,55 +1,76 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import Icon from '@/components/ui/icon';
-import HeroSection from '@/components/HeroSection';
-import HotelCatalog from '@/components/HotelCatalog';
-import SPASection from '@/components/SPASection';
-import ContactForm from '@/components/ContactForm';
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Icon from "@/components/ui/icon";
+import HeroSection from "@/components/HeroSection";
+import HotelCatalog from "@/components/HotelCatalog";
+import SPASection from "@/components/SPASection";
+import ContactForm from "@/components/ContactForm";
 
 const packages = [
   {
-    title: 'Романтический уик-энд',
-    price: '95 000',
-    features: ['2 ночи в люкс-номере', 'Ужин в панорамном ресторане', 'SPA для двоих', 'Шампанское и фрукты']
+    title: "Романтический уик-энд",
+    price: "95 000",
+    features: [
+      "2 ночи в люкс-номере",
+      "Ужин в панорамном ресторане",
+      "SPA для двоих",
+      "Шампанское и фрукты",
+    ],
   },
   {
-    title: 'Деловая поездка',
-    price: '120 000',
-    features: ['3 ночи', 'Переговорная комната', 'Трансфер бизнес-класса', 'Личный ассистент']
+    title: "Деловая поездка",
+    price: "120 000",
+    features: [
+      "3 ночи",
+      "Переговорная комната",
+      "Трансфер бизнес-класса",
+      "Личный ассистент",
+    ],
   },
   {
-    title: 'Wellness-retreat',
-    price: '180 000',
-    features: ['5 ночей', 'Ежедневные SPA-процедуры', 'Персональный тренер', 'Детокс-меню от шеф-повара']
-  }
+    title: "Wellness-retreat",
+    price: "180 000",
+    features: [
+      "5 ночей",
+      "Ежедневные SPA-процедуры",
+      "Персональный тренер",
+      "Детокс-меню от шеф-повара",
+    ],
+  },
 ];
 
 const reviews = [
   {
-    name: 'Екатерина Волкова',
+    name: "Екатерина Волкова",
     rating: 5,
-    text: 'Безупречный сервис! Личный дворецкий предугадывал все наши желания. SPA-комплекс мирового уровня.',
-    hotel: 'Grand Palace Moscow'
+    text: "Безупречный сервис! Личный дворецкий предугадывал все наши желания. SPA-комплекс мирового уровня.",
+    hotel: "Grand Palace Moscow",
   },
   {
-    name: 'Александр Соколов',
+    name: "Александр Соколов",
     rating: 5,
-    text: 'Останавливался на деловой встрече. Идеальное расположение, высочайший уровень комфорта и конфиденциальности.',
-    hotel: 'Boutique Lux Arbat'
+    text: "Останавливался на деловой встрече. Идеальное расположение, высочайший уровень комфорта и конфиденциальности.",
+    hotel: "Boutique Lux Arbat",
   },
   {
-    name: 'Мария Белова',
+    name: "Мария Белова",
     rating: 5,
-    text: 'Отмечали годовщину. Романтический пакет превзошёл все ожидания — ужин с видом на Москву незабываем!',
-    hotel: 'Premium Towers'
-  }
+    text: "Отмечали годовщину. Романтический пакет превзошёл все ожидания — ужин с видом на Москву незабываем!",
+    hotel: "Premium Towers",
+  },
 ];
 
 const Index = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
@@ -58,13 +79,40 @@ const Index = () => {
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-dark">PREMIUM HOTELS</h1>
+            <h1 className="text-2xl font-bold text-dark">
+              BOOKING & PREMIUM HOTELS
+            </h1>
             <div className="hidden md:flex gap-8 items-center">
-              <button onClick={() => scrollToSection('catalog')} className="text-sm hover:text-gold transition-colors">Каталог</button>
-              <button onClick={() => scrollToSection('spa')} className="text-sm hover:text-gold transition-colors">SPA</button>
-              <button onClick={() => scrollToSection('packages')} className="text-sm hover:text-gold transition-colors">Предложения</button>
-              <button onClick={() => scrollToSection('reviews')} className="text-sm hover:text-gold transition-colors">Отзывы</button>
-              <button onClick={() => scrollToSection('contact')} className="text-sm hover:text-gold transition-colors">Контакты</button>
+              <button
+                onClick={() => scrollToSection("catalog")}
+                className="text-sm hover:text-gold transition-colors"
+              >
+                Каталог
+              </button>
+              <button
+                onClick={() => scrollToSection("spa")}
+                className="text-sm hover:text-gold transition-colors"
+              >
+                SPA
+              </button>
+              <button
+                onClick={() => scrollToSection("packages")}
+                className="text-sm hover:text-gold transition-colors"
+              >
+                Предложения
+              </button>
+              <button
+                onClick={() => scrollToSection("reviews")}
+                className="text-sm hover:text-gold transition-colors"
+              >
+                Отзывы
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="text-sm hover:text-gold transition-colors"
+              >
+                Контакты
+              </button>
               <Button className="bg-gold hover:bg-gold/90 text-dark">
                 +7 (495) 123-45-67
               </Button>
@@ -83,13 +131,20 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-light mb-4">Эксклюзивные пакеты</h2>
-            <p className="text-gray-300 text-lg">Готовые предложения для незабываемого отдыха</p>
+            <p className="text-gray-300 text-lg">
+              Готовые предложения для незабываемого отдыха
+            </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
-              <Card key={index} className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+              <Card
+                key={index}
+                className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
+              >
                 <CardHeader>
-                  <CardTitle className="text-2xl text-white">{pkg.title}</CardTitle>
+                  <CardTitle className="text-2xl text-white">
+                    {pkg.title}
+                  </CardTitle>
                   <CardDescription className="text-3xl font-bold text-gold mt-4">
                     {pkg.price} ₽
                   </CardDescription>
@@ -97,8 +152,15 @@ const Index = () => {
                 <CardContent>
                   <div className="space-y-3 mb-6">
                     {pkg.features.map((feature, i) => (
-                      <div key={i} className="flex items-start gap-2 text-gray-300">
-                        <Icon name="Check" size={16} className="text-gold mt-1" />
+                      <div
+                        key={i}
+                        className="flex items-start gap-2 text-gray-300"
+                      >
+                        <Icon
+                          name="Check"
+                          size={16}
+                          className="text-gold mt-1"
+                        />
                         <span>{feature}</span>
                       </div>
                     ))}
@@ -117,7 +179,9 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-light mb-4">Отзывы гостей</h2>
-            <p className="text-gray-600 text-lg">Что говорят о нас наши гости</p>
+            <p className="text-gray-600 text-lg">
+              Что говорят о нас наши гости
+            </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {reviews.map((review, index) => (
@@ -125,14 +189,23 @@ const Index = () => {
                 <CardHeader>
                   <div className="flex items-center gap-1 mb-2">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Icon key={i} name="Star" size={16} className="fill-gold text-gold" />
+                      <Icon
+                        key={i}
+                        name="Star"
+                        size={16}
+                        className="fill-gold text-gold"
+                      />
                     ))}
                   </div>
                   <CardTitle className="text-xl">{review.name}</CardTitle>
-                  <CardDescription className="text-sm text-gray-500">{review.hotel}</CardDescription>
+                  <CardDescription className="text-sm text-gray-500">
+                    {review.hotel}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700 leading-relaxed italic">"{review.text}"</p>
+                  <p className="text-gray-700 leading-relaxed italic">
+                    "{review.text}"
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -146,15 +219,31 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="text-xl font-bold mb-4 text-gold">PREMIUM HOTELS</h3>
-              <p className="text-gray-400 text-sm">Бронирование премиум-отелей в Москве</p>
+              <h3 className="text-xl font-bold mb-4 text-gold">
+                PREMIUM HOTELS
+              </h3>
+              <p className="text-gray-400 text-sm">
+                Бронирование премиум-отелей в Москве
+              </p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Услуги</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-gold transition-colors">Бронирование</a></li>
-                <li><a href="#" className="hover:text-gold transition-colors">SPA & Wellness</a></li>
-                <li><a href="#" className="hover:text-gold transition-colors">Консьерж</a></li>
+                <li>
+                  <a href="#" className="hover:text-gold transition-colors">
+                    Бронирование
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gold transition-colors">
+                    SPA & Wellness
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gold transition-colors">
+                    Консьерж
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
