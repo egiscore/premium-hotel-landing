@@ -9,7 +9,7 @@ const hotels = [
     name: 'Grand Palace Moscow',
     location: 'Тверская улица',
     price: '45 000',
-    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
     features: ['Личный дворецкий', 'Панорамный ресторан', 'SPA-комплекс']
   },
   {
@@ -17,7 +17,7 @@ const hotels = [
     name: 'Boutique Lux Arbat',
     location: 'Центр Москвы',
     price: '38 000',
-    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/d743b16f-8265-4a09-a059-652f9c042f19.jpg',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/a0c9aea2-5dc6-4d14-a219-0072e564aa6f.jpg',
     features: ['5 звёзд', 'Бутик-отель', 'VIP-зона']
   },
   {
@@ -25,7 +25,7 @@ const hotels = [
     name: 'Premium Towers',
     location: 'Москва-Сити',
     price: '52 000',
-    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/2f125914-e98c-4afb-ab59-69767abcec31.jpg',
     features: ['Апартаменты люкс', 'Панорамный вид', 'Консьерж 24/7']
   },
   {
@@ -181,69 +181,51 @@ const HotelCatalog = () => {
           <p className="text-gray-600 text-lg">Избранные отели Москвы для самых взыскательных гостей</p>
         </div>
         
-        <div className="bg-white rounded-lg shadow-md p-6 mb-12">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium mb-3 text-gray-700">
-                <Icon name="MapPin" size={16} className="inline mr-2" />
-                Локация
-              </label>
-              <div className="grid grid-cols-2 gap-2">
+        <div className="bg-white rounded-lg shadow-md p-5 mb-12">
+          <div className="flex items-center gap-6 flex-wrap">
+            <div className="flex items-center gap-3">
+              <Icon name="MapPin" size={18} className="text-gold" />
+              <select 
+                value={selectedLocation}
+                onChange={(e) => setSelectedLocation(e.target.value)}
+                className="px-4 py-2 rounded-md border border-gray-200 focus:border-gold focus:outline-none text-sm min-w-[200px]"
+              >
                 {locations.map(location => (
-                  <button
-                    key={location}
-                    onClick={() => setSelectedLocation(location)}
-                    className={`px-4 py-2 rounded-md text-sm transition-all ${
-                      selectedLocation === location
-                        ? 'bg-gold text-dark font-medium'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {location}
-                  </button>
+                  <option key={location} value={location}>{location}</option>
                 ))}
-              </div>
+              </select>
             </div>
             
-            <div>
-              <label className="block text-sm font-medium mb-3 text-gray-700">
-                <Icon name="Wallet" size={16} className="inline mr-2" />
-                Цена за ночь
-              </label>
-              <div className="space-y-2">
-                {priceRanges.map(range => (
-                  <button
-                    key={range.label}
-                    onClick={() => setPriceRange(range.label)}
-                    className={`w-full px-4 py-2 rounded-md text-sm transition-all text-left ${
-                      priceRange === range.label
-                        ? 'bg-gold text-dark font-medium'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {range.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-6 pt-6 border-t border-gray-200 flex items-center justify-between">
-            <p className="text-sm text-gray-600">
-              Найдено отелей: <span className="font-semibold text-dark">{filteredHotels.length}</span>
-            </p>
-            {(selectedLocation !== 'Все' || priceRange !== 'Все') && (
-              <button
-                onClick={() => {
-                  setSelectedLocation('Все');
-                  setPriceRange('Все');
-                }}
-                className="text-sm text-gold hover:text-dark transition-colors flex items-center gap-1"
+            <div className="flex items-center gap-3">
+              <Icon name="Wallet" size={18} className="text-gold" />
+              <select 
+                value={priceRange}
+                onChange={(e) => setPriceRange(e.target.value)}
+                className="px-4 py-2 rounded-md border border-gray-200 focus:border-gold focus:outline-none text-sm min-w-[200px]"
               >
-                <Icon name="X" size={14} />
-                Сбросить фильтры
-              </button>
-            )}
+                {priceRanges.map(range => (
+                  <option key={range.label} value={range.label}>{range.label}</option>
+                ))}
+              </select>
+            </div>
+            
+            <div className="flex items-center gap-4 ml-auto">
+              <p className="text-sm text-gray-600">
+                Найдено: <span className="font-semibold text-dark">{filteredHotels.length}</span>
+              </p>
+              {(selectedLocation !== 'Все' || priceRange !== 'Все') && (
+                <button
+                  onClick={() => {
+                    setSelectedLocation('Все');
+                    setPriceRange('Все');
+                  }}
+                  className="text-sm text-gold hover:text-dark transition-colors flex items-center gap-1"
+                >
+                  <Icon name="X" size={14} />
+                  Сбросить
+                </button>
+              )}
+            </div>
           </div>
         </div>
         
