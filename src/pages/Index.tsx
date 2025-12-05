@@ -74,6 +74,17 @@ const Index = () => {
     }
   };
 
+  const handleBookPackage = (packageTitle: string) => {
+    scrollToSection("contact");
+    setTimeout(() => {
+      const messageInput = document.querySelector('textarea[placeholder*="сообщение"]') as HTMLTextAreaElement;
+      if (messageInput) {
+        messageInput.value = `Здравствуйте! Хочу забронировать пакет "${packageTitle}".`;
+        messageInput.focus();
+      }
+    }, 500);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
@@ -165,7 +176,10 @@ const Index = () => {
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-gold hover:bg-gold/90 text-dark">
+                  <Button 
+                    className="w-full bg-gold hover:bg-gold/90 text-dark"
+                    onClick={() => handleBookPackage(pkg.title)}
+                  >
                     Забронировать пакет
                   </Button>
                 </CardContent>
