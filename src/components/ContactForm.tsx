@@ -11,11 +11,34 @@ const ContactForm = () => {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Спасибо! Наш консьерж свяжется с вами в ближайшее время.');
-    setFormData({ name: '', phone: '', email: '', message: '' });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/dfa9e878-6ce1-4e00-926b-dea259794eb6', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+        setFormData({ name: '', phone: '', email: '', message: '' });
+      } else {
+        alert('Ошибка отправки. Попробуйте позже или позвоните нам.');
+      }
+    } catch (error) {
+      alert('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -69,8 +92,8 @@ const ContactForm = () => {
                   onChange={(e) => setFormData({...formData, message: e.target.value})}
                 />
               </div>
-              <Button type="submit" size="lg" className="w-full bg-dark hover:bg-dark/90 text-white">
-                Отправить запрос
+              <Button type="submit" size="lg" className="w-full bg-dark hover:bg-dark/90 text-white" disabled={isSubmitting}>
+                {isSubmitting ? 'Отправляем...' : 'Отправить запрос'}
               </Button>
             </form>
           </CardContent>
