@@ -3,8 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import HotelGallery from '@/components/HotelGallery';
+import AdminPanel from '@/components/AdminPanel';
 
-const hotels = [
+const initialHotels = [
   {
     id: 1,
     name: 'Grand Palace Moscow',
@@ -314,8 +315,10 @@ const hotels = [
 ];
 
 const HotelCatalog = () => {
+  const [hotels, setHotels] = useState(initialHotels);
   const [selectedLocation, setSelectedLocation] = useState('Все');
   const [priceRange, setPriceRange] = useState('Все');
+  const [showAdmin, setShowAdmin] = useState(false);
 
   const locations = ['Все', 'Центр Москвы', 'Тверская улица', 'Москва-Сити', 'Патриаршие пруды', 'Кутузовский проспект', 'Замоскворечье', 'Остоженка', 'Рублёвское шоссе', 'Чистые пруды', 'Пресненская набережная', 'Сретенский бульвар', 'Маросейка', 'Воробьёвы горы', 'Поварская улица', 'Серебряный Бор', 'Большая Никитская', 'Золотые ключи', 'Крымский вал'];
   const priceRanges = [
@@ -325,6 +328,10 @@ const HotelCatalog = () => {
     { label: '55 000 - 65 000 ₽', min: 55000, max: 65000 },
     { label: 'От 65 000 ₽', min: 65000, max: Infinity }
   ];
+
+  const handleDeleteHotel = (id: number) => {
+    setHotels(hotels.filter(hotel => hotel.id !== id));
+  };
 
   const filteredHotels = hotels.filter(hotel => {
     const hotelPrice = parseInt(hotel.price.replace(/\s/g, ''));
@@ -340,7 +347,18 @@ const HotelCatalog = () => {
     <section id="catalog" className="py-20 px-6 bg-gray-50">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-5xl font-light mb-4">Каталог премиум-отелей</h2>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <h2 className="text-5xl font-light">Каталог премиум-отелей</h2>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setShowAdmin(true)}
+              className="text-gray-400 hover:text-gold"
+              title="Управление отелями"
+            >
+              <Icon name="Settings" size={24} />
+            </Button>
+          </div>
           <p className="text-gray-600 text-lg">Избранные отели Москвы для самых взыскательных гостей</p>
         </div>
         
@@ -457,6 +475,14 @@ const HotelCatalog = () => {
           )}
         </div>
       </div>
+      
+      {showAdmin && (
+        <AdminPanel
+          hotels={hotels}
+          onDelete={handleDeleteHotel}
+          onClose={() => setShowAdmin(false)}
+        />
+      )}
     </section>
   );
 };
