@@ -29,6 +29,54 @@ const hotels = [
     price: '52 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
     features: ['Апартаменты люкс', 'Панорамный вид', 'Консьерж 24/7']
+  },
+  {
+    id: 4,
+    name: 'Imperial Suite Hotel',
+    location: 'Патриаршие пруды',
+    price: '62 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+    features: ['Исторический особняк', 'Винный погреб', 'Библиотека и камин']
+  },
+  {
+    id: 5,
+    name: 'Skyline Residence',
+    location: 'Кутузовский проспект',
+    price: '48 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+    features: ['Панорамные окна', 'Фитнес-клуб', 'Крытый бассейн']
+  },
+  {
+    id: 6,
+    name: 'Royal Garden Hotel',
+    location: 'Замоскворечье',
+    price: '42 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/d743b16f-8265-4a09-a059-652f9c042f19.jpg',
+    features: ['Парковая зона', 'Терраса на крыше', 'Michelin ресторан']
+  },
+  {
+    id: 7,
+    name: 'Metropolitan Elite',
+    location: 'Остоженка',
+    price: '55 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg',
+    features: ['Дизайнерские интерьеры', 'Арт-галерея', 'Сигарная комната']
+  },
+  {
+    id: 8,
+    name: 'Crystal Palace',
+    location: 'Рублёвское шоссе',
+    price: '68 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+    features: ['Загородный комплекс', 'Конюшня и верховая езда', 'Частный пляж']
+  },
+  {
+    id: 9,
+    name: 'Heritage Boutique',
+    location: 'Чистые пруды',
+    price: '41 000',
+    image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/d743b16f-8265-4a09-a059-652f9c042f19.jpg',
+    features: ['Антикварная мебель', 'Камерная атмосфера', 'Домашний кинотеатр']
   }
 ];
 
