@@ -32,7 +32,16 @@ const SPASection = () => {
                 </div>
               ))}
             </div>
-            <Button size="lg" className="mt-8 bg-dark hover:bg-dark/90 text-white">
+            <Button 
+              size="lg" 
+              className="mt-8 bg-dark hover:bg-dark/90 text-white"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               Узнать подробнее
             </Button>
           </div>

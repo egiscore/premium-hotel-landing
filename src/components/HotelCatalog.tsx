@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import HotelGallery from '@/components/HotelGallery';
 
 const hotels = [
   {
@@ -10,7 +11,12 @@ const hotels = [
     location: 'Тверская улица',
     price: '45 000',
     image: 'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
-    features: ['Личный дворецкий', 'Панорамный ресторан', 'SPA-комплекс']
+    features: ['Личный дворецкий', 'Панорамный ресторан', 'SPA-комплекс'],
+    gallery: [
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/08733a9c-41c0-40b7-88bb-30ac87c9ebe2.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/c8299e4a-9525-4f37-9541-1c8a816e7eb7.jpg',
+      'https://cdn.poehali.dev/projects/a80e62eb-d0ff-446f-a459-c9ea48d4127d/files/cf76723f-e195-46b5-b0f1-18b27cbeccde.jpg'
+    ]
   },
   {
     id: 2,
@@ -258,13 +264,33 @@ const HotelCatalog = () => {
                     </div>
                   ))}
                 </div>
-                <div className="flex items-center justify-between pt-4 border-t">
+                
+                {hotel.gallery && hotel.gallery.length > 0 && (
+                  <HotelGallery images={hotel.gallery} hotelName={hotel.name} />
+                )}
+                
+                <div className="flex items-center justify-between pt-4 border-t mt-4">
                   <div>
                     <p className="text-sm text-gray-500">от</p>
                     <p className="text-2xl font-semibold">{hotel.price} ₽</p>
                     <p className="text-xs text-gray-500">за ночь</p>
                   </div>
-                  <Button className="bg-gold hover:bg-gold/90 text-dark">
+                  <Button 
+                    className="bg-gold hover:bg-gold/90 text-dark"
+                    onClick={() => {
+                      const contactSection = document.getElementById('contact');
+                      if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        setTimeout(() => {
+                          const messageInput = document.querySelector('textarea[placeholder*="сообщение"]') as HTMLTextAreaElement;
+                          if (messageInput) {
+                            messageInput.value = `Здравствуйте! Хочу забронировать отель "${hotel.name}".`;
+                            messageInput.focus();
+                          }
+                        }, 500);
+                      }
+                    }}
+                  >
                     Забронировать
                   </Button>
                 </div>

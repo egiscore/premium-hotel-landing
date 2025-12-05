@@ -76,11 +76,19 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             image_url = body_data.get('image_url', '').replace("'", "''")
             features_list = body_data.get('features', [])
             features_str = ','.join([f"'{f.replace(chr(39), chr(39)+chr(39))}'" for f in features_list])
-            features_array = '{' + features_str + '}'
             
-            cur.execute(
-                f"INSERT INTO hotels (name, location, price, image_url, features) VALUES ('{name}', '{location}', {price}, '{image_url}', ARRAY[{features_str}]::text[]) RETURNING *"
-            )
+            gallery_list = body_data.get('gallery', [])
+            gallery_str = ','.join([f"'{g.replace(chr(39), chr(39)+chr(39))}'" for g in gallery_list]) if gallery_list else ''
+            
+            if gallery_str:
+                cur.execute(
+                    f"INSERT INTO hotels (name, location, price, image_url, features, gallery) VALUES ('{name}', '{location}', {price}, '{image_url}', ARRAY[{features_str}]::text[], ARRAY[{gallery_str}]::text[]) RETURNING *"
+                )
+            else:
+                cur.execute(
+                    f"INSERT INTO hotels (name, location, price, image_url, features, gallery) VALUES ('{name}', '{location}', {price}, '{image_url}', ARRAY[{features_str}]::text[], ARRAY[]::text[]) RETURNING *"
+                )
+            
             conn.commit()
             new_hotel = cur.fetchone()
             
@@ -106,9 +114,18 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             features_list = body_data.get('features', [])
             features_str = ','.join([f"'{f.replace(chr(39), chr(39)+chr(39))}'" for f in features_list])
             
-            cur.execute(
-                f"UPDATE hotels SET name = '{name}', location = '{location}', price = {price}, image_url = '{image_url}', features = ARRAY[{features_str}]::text[], updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id} RETURNING *"
-            )
+            gallery_list = body_data.get('gallery', [])
+            gallery_str = ','.join([f"'{g.replace(chr(39), chr(39)+chr(39))}'" for g in gallery_list]) if gallery_list else ''
+            
+            if gallery_str:
+                cur.execute(
+                    f"UPDATE hotels SET name = '{name}', location = '{location}', price = {price}, image_url = '{image_url}', features = ARRAY[{features_str}]::text[], gallery = ARRAY[{gallery_str}]::text[], updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id} RETURNING *"
+                )
+            else:
+                cur.execute(
+                    f"UPDATE hotels SET name = '{name}', location = '{location}', price = {price}, image_url = '{image_url}', features = ARRAY[{features_str}]::text[], gallery = ARRAY[]::text[], updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id} RETURNING *"
+                )
+            
             conn.commit()
             updated_hotel = cur.fetchone()
             

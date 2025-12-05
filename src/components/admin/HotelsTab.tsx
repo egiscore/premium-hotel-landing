@@ -11,6 +11,7 @@ interface Hotel {
   price: number;
   image_url: string;
   features: string[];
+  gallery: string[];
 }
 
 interface HotelForm {
@@ -19,6 +20,7 @@ interface HotelForm {
   price: number;
   image_url: string;
   features: string;
+  gallery: string;
 }
 
 interface HotelsTabProps {
@@ -49,7 +51,7 @@ const HotelsTab = ({
         <Button onClick={() => {
           setIsEditing(!isEditing);
           setEditingId(null);
-          setHotelForm({ name: '', location: '', price: 0, image_url: '', features: '' });
+          setHotelForm({ name: '', location: '', price: 0, image_url: '', features: '', gallery: '' });
         }}>
           <Icon name={isEditing ? "X" : "Plus"} size={20} className="mr-2" />
           {isEditing ? 'Отмена' : 'Добавить отель'}
@@ -94,6 +96,12 @@ const HotelsTab = ({
                 value={hotelForm.features}
                 onChange={(e) => setHotelForm({ ...hotelForm, features: e.target.value })}
               />
+              <Textarea
+                placeholder="URL фотографий галереи (через запятую)"
+                value={hotelForm.gallery}
+                onChange={(e) => setHotelForm({ ...hotelForm, gallery: e.target.value })}
+                rows={3}
+              />
               <Button type="submit" className="w-full">
                 {editingId ? 'Обновить' : 'Создать'}
               </Button>
@@ -127,7 +135,8 @@ const HotelsTab = ({
                       location: hotel.location,
                       price: hotel.price,
                       image_url: hotel.image_url,
-                      features: hotel.features.join(', ')
+                      features: hotel.features.join(', '),
+                      gallery: (hotel.gallery || []).join(', ')
                     });
                     setEditingId(hotel.id);
                     setIsEditing(true);

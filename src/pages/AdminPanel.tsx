@@ -16,6 +16,7 @@ interface Hotel {
   price: number;
   image_url: string;
   features: string[];
+  gallery: string[];
 }
 
 interface Page {
@@ -50,7 +51,8 @@ const AdminPanel = () => {
     location: '',
     price: 0,
     image_url: '',
-    features: ''
+    features: '',
+    gallery: ''
   });
 
   const [pageForm, setPageForm] = useState({
@@ -150,13 +152,14 @@ const AdminPanel = () => {
         },
         body: JSON.stringify({
           ...hotelForm,
-          features: hotelForm.features.split(',').map(f => f.trim())
+          features: hotelForm.features.split(',').map(f => f.trim()),
+          gallery: hotelForm.gallery ? hotelForm.gallery.split(',').map(g => g.trim()) : []
         })
       });
 
       if (response.ok) {
         toast({ title: 'Успешно', description: editingId ? 'Отель обновлен' : 'Отель создан' });
-        setHotelForm({ name: '', location: '', price: 0, image_url: '', features: '' });
+        setHotelForm({ name: '', location: '', price: 0, image_url: '', features: '', gallery: '' });
         setIsEditing(false);
         setEditingId(null);
         fetchHotels();
