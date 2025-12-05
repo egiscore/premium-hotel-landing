@@ -57,8 +57,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             password_hash = hash_password(password)
             
             cur.execute(
-                'SELECT * FROM users WHERE email = %s AND password_hash = %s',
-                (email, password_hash)
+                f"SELECT * FROM users WHERE email = '{email}' AND password_hash = '{password_hash}'"
             )
             user = cur.fetchone()
             
@@ -77,8 +76,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             expires_at = datetime.now() + timedelta(days=7)
             
             cur.execute(
-                'INSERT INTO sessions (user_id, token, expires_at) VALUES (%s, %s, %s)',
-                (user['id'], token, expires_at)
+                f"INSERT INTO sessions (user_id, token, expires_at) VALUES ({user['id']}, '{token}', '{expires_at}')"
             )
             conn.commit()
             
@@ -116,10 +114,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 }
             
             cur.execute(
-                '''SELECT u.* FROM users u 
-                   JOIN sessions s ON u.id = s.user_id 
-                   WHERE s.token = %s AND s.expires_at > NOW()''',
-                (token,)
+                f"SELECT u.* FROM users u JOIN sessions s ON u.id = s.user_id WHERE s.token = '{token}' AND s.expires_at > NOW()"
             )
             user = cur.fetchone()
             
