@@ -79,6 +79,13 @@ const Index = () => {
     message: ''
   });
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert('Спасибо! Наш консьерж свяжется с вами в ближайшее время.');
@@ -92,11 +99,11 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-dark">PREMIUM HOTELS</h1>
             <div className="hidden md:flex gap-8 items-center">
-              <a href="#catalog" className="text-sm hover:text-gold transition-colors">Каталог</a>
-              <a href="#spa" className="text-sm hover:text-gold transition-colors">SPA</a>
-              <a href="#packages" className="text-sm hover:text-gold transition-colors">Предложения</a>
-              <a href="#reviews" className="text-sm hover:text-gold transition-colors">Отзывы</a>
-              <a href="#contact" className="text-sm hover:text-gold transition-colors">Контакты</a>
+              <button onClick={() => scrollToSection('catalog')} className="text-sm hover:text-gold transition-colors">Каталог</button>
+              <button onClick={() => scrollToSection('spa')} className="text-sm hover:text-gold transition-colors">SPA</button>
+              <button onClick={() => scrollToSection('packages')} className="text-sm hover:text-gold transition-colors">Предложения</button>
+              <button onClick={() => scrollToSection('reviews')} className="text-sm hover:text-gold transition-colors">Отзывы</button>
+              <button onClick={() => scrollToSection('contact')} className="text-sm hover:text-gold transition-colors">Контакты</button>
               <Button className="bg-gold hover:bg-gold/90 text-dark">
                 +7 (495) 123-45-67
               </Button>
@@ -117,10 +124,10 @@ const Index = () => {
                 Премиум-отели с безупречным сервисом, личным дворецким и SPA-комплексами мирового класса
               </p>
               <div className="flex gap-4">
-                <Button size="lg" className="bg-dark hover:bg-dark/90 text-white px-8">
+                <Button size="lg" className="bg-dark hover:bg-dark/90 text-white px-8" onClick={() => scrollToSection('contact')}>
                   Забронировать
                 </Button>
-                <Button size="lg" variant="outline" className="border-dark text-dark hover:bg-dark hover:text-white">
+                <Button size="lg" variant="outline" className="border-dark text-dark hover:bg-dark hover:text-white" onClick={() => scrollToSection('catalog')}>
                   Каталог отелей
                 </Button>
               </div>
