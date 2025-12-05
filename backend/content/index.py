@@ -12,8 +12,7 @@ def verify_token(token: str, cur) -> bool:
     if not token:
         return False
     cur.execute(
-        'SELECT user_id FROM sessions WHERE token = %s AND expires_at > NOW()',
-        (token,)
+        f"SELECT user_id FROM sessions WHERE token = '{token}' AND expires_at > NOW()"
     )
     return cur.fetchone() is not None
 
@@ -46,7 +45,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             page = params.get('page')
             
             if page:
-                cur.execute('SELECT * FROM site_content WHERE page = %s ORDER BY key', (page,))
+                cur.execute(f"SELECT * FROM site_content WHERE page = '{page}' ORDER BY key")
             else:
                 cur.execute('SELECT * FROM site_content ORDER BY page, key')
             
@@ -80,16 +79,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             content_id = path_params.get('id')
             body_data = json.loads(event.get('body', '{}'))
             
+            value = body_data.get('value', '').replace("'", "''")
+            description = body_data.get('description', '').replace("'", "''")
+            page_val = body_data.get('page', '').replace("'", "''")
+            
             cur.execute(
-                '''UPDATE site_content 
-                   SET value = %s, description = %s, page = %s, updated_at = CURRENT_TIMESTAMP 
-                   WHERE id = %s RETURNING *''',
-                (
-                    body_data.get('value'),
-                    body_data.get('description'),
-                    body_data.get('page'),
-                    content_id
-                )
+                f"UPDATE site_content SET value = '{value}', description = '{description}', page = '{page_val}', updated_at = CURRENT_TIMESTAMP WHERE id = {content_id} RETURNING *"
             )
             conn.commit()
             updated_content = cur.fetchone()
@@ -107,15 +102,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         elif method == 'POST':
             body_data = json.loads(event.get('body', '{}'))
             
+            key = body_data.get('key', '').replace("'", "''")
+            value = body_data.get('value', '').replace("'", "''")
+            description = body_data.get('description', '').replace("'", "''")
+            page_val = body_data.get('page', '').replace("'", "''")
+            
             cur.execute(
-                '''INSERT INTO site_content (key, value, description, page) 
-                   VALUES (%s, %s, %s, %s) RETURNING *''',
-                (
-                    body_data.get('key'),
-                    body_data.get('value'),
-                    body_data.get('description'),
-                    body_data.get('page')
-                )
+                f"INSERT INTO site_content (key, value, description, page) VALUES ('{key}', '{value}', '{description}', '{page_val}') RETURNING *"
             )
             conn.commit()
             new_content = cur.fetchone()

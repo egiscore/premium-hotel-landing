@@ -12,8 +12,7 @@ def verify_token(token: str, cur) -> bool:
     if not token:
         return False
     cur.execute(
-        'SELECT user_id FROM sessions WHERE token = %s AND expires_at > NOW()',
-        (token,)
+        f"SELECT user_id FROM sessions WHERE token = '{token}' AND expires_at > NOW()"
     )
     return cur.fetchone() is not None
 
@@ -71,16 +70,14 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         if method == 'POST':
             body_data = json.loads(event.get('body', '{}'))
             
+            name = body_data.get('name', '').replace("'", "''")
+            location = body_data.get('location', '').replace("'", "''")
+            price = body_data.get('price', 0)
+            image_url = body_data.get('image_url', '').replace("'", "''")
+            features = json.dumps(body_data.get('features', [])).replace("'", "''")
+            
             cur.execute(
-                '''INSERT INTO hotels (name, location, price, image_url, features) 
-                   VALUES (%s, %s, %s, %s, %s) RETURNING *''',
-                (
-                    body_data.get('name'),
-                    body_data.get('location'),
-                    body_data.get('price'),
-                    body_data.get('image_url'),
-                    body_data.get('features', [])
-                )
+                f"INSERT INTO hotels (name, location, price, image_url, features) VALUES ('{name}', '{location}', {price}, '{image_url}', '{features}') RETURNING *"
             )
             conn.commit()
             new_hotel = cur.fetchone()
@@ -100,19 +97,14 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             hotel_id = path_params.get('id')
             body_data = json.loads(event.get('body', '{}'))
             
+            name = body_data.get('name', '').replace("'", "''")
+            location = body_data.get('location', '').replace("'", "''")
+            price = body_data.get('price', 0)
+            image_url = body_data.get('image_url', '').replace("'", "''")
+            features = json.dumps(body_data.get('features', [])).replace("'", "''")
+            
             cur.execute(
-                '''UPDATE hotels 
-                   SET name = %s, location = %s, price = %s, 
-                       image_url = %s, features = %s, updated_at = CURRENT_TIMESTAMP 
-                   WHERE id = %s RETURNING *''',
-                (
-                    body_data.get('name'),
-                    body_data.get('location'),
-                    body_data.get('price'),
-                    body_data.get('image_url'),
-                    body_data.get('features', []),
-                    hotel_id
-                )
+                f"UPDATE hotels SET name = '{name}', location = '{location}', price = {price}, image_url = '{image_url}', features = '{features}', updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id} RETURNING *"
             )
             conn.commit()
             updated_hotel = cur.fetchone()
@@ -131,7 +123,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             path_params = event.get('pathParams', {})
             hotel_id = path_params.get('id')
             
-            cur.execute('UPDATE hotels SET updated_at = CURRENT_TIMESTAMP WHERE id = %s', (hotel_id,))
+            cur.execute(f'UPDATE hotels SET updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id}')
             conn.commit()
             
             return {
