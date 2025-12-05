@@ -127,6 +127,27 @@ const Index = () => {
     message: ''
   });
 
+  const [selectedLocation, setSelectedLocation] = useState('Все');
+  const [priceRange, setPriceRange] = useState('Все');
+
+  const locations = ['Все', 'Центр Москвы', 'Тверская улица', 'Москва-Сити', 'Патриаршие пруды', 'Кутузовский проспект', 'Замоскворечье', 'Остоженка', 'Рублёвское шоссе', 'Чистые пруды'];
+  const priceRanges = [
+    { label: 'Все', min: 0, max: Infinity },
+    { label: 'До 45 000 ₽', min: 0, max: 45000 },
+    { label: '45 000 - 55 000 ₽', min: 45000, max: 55000 },
+    { label: 'От 55 000 ₽', min: 55000, max: Infinity }
+  ];
+
+  const filteredHotels = hotels.filter(hotel => {
+    const hotelPrice = parseInt(hotel.price.replace(/\s/g, ''));
+    const selectedPriceRange = priceRanges.find(r => r.label === priceRange);
+    
+    const locationMatch = selectedLocation === 'Все' || hotel.location === selectedLocation;
+    const priceMatch = !selectedPriceRange || (hotelPrice >= selectedPriceRange.min && hotelPrice <= selectedPriceRange.max);
+    
+    return locationMatch && priceMatch;
+  });
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -193,12 +214,86 @@ const Index = () => {
 
       <section id="catalog" className="py-20 px-6 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-5xl font-light mb-4">Каталог премиум-отелей</h2>
             <p className="text-gray-600 text-lg">Избранные отели Москвы для самых взыскательных гостей</p>
           </div>
+          
+          <div className="bg-white rounded-lg shadow-md p-6 mb-12">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium mb-3 text-gray-700">
+                  <Icon name="MapPin" size={16} className="inline mr-2" />
+                  Локация
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {locations.map(location => (
+                    <button
+                      key={location}
+                      onClick={() => setSelectedLocation(location)}
+                      className={`px-4 py-2 rounded-md text-sm transition-all ${
+                        selectedLocation === location
+                          ? 'bg-gold text-dark font-medium'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      {location}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium mb-3 text-gray-700">
+                  <Icon name="Wallet" size={16} className="inline mr-2" />
+                  Цена за ночь
+                </label>
+                <div className="space-y-2">
+                  {priceRanges.map(range => (
+                    <button
+                      key={range.label}
+                      onClick={() => setPriceRange(range.label)}
+                      className={`w-full px-4 py-2 rounded-md text-sm transition-all text-left ${
+                        priceRange === range.label
+                          ? 'bg-gold text-dark font-medium'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      {range.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-6 pt-6 border-t border-gray-200 flex items-center justify-between">
+              <p className="text-sm text-gray-600">
+                Найдено отелей: <span className="font-semibold text-dark">{filteredHotels.length}</span>
+              </p>
+              {(selectedLocation !== 'Все' || priceRange !== 'Все') && (
+                <button
+                  onClick={() => {
+                    setSelectedLocation('Все');
+                    setPriceRange('Все');
+                  }}
+                  className="text-sm text-gold hover:text-dark transition-colors flex items-center gap-1"
+                >
+                  <Icon name="X" size={14} />
+                  Сбросить фильтры
+                </button>
+              )}
+            </div>
+          </div>
+          
           <div className="grid md:grid-cols-3 gap-8">
-            {hotels.map((hotel, index) => (
+            {filteredHotels.length === 0 ? (
+              <div className="col-span-3 text-center py-12">
+                <Icon name="SearchX" size={48} className="mx-auto text-gray-400 mb-4" />
+                <p className="text-xl text-gray-600">По выбранным фильтрам отели не найдены</p>
+                <p className="text-sm text-gray-500 mt-2">Попробуйте изменить параметры поиска</p>
+              </div>
+            ) : (
+              filteredHotels.map((hotel, index) => (
               <Card key={hotel.id} className="overflow-hidden border-none shadow-lg hover:shadow-2xl transition-all duration-300 animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
                 <div className="h-64 overflow-hidden">
                   <img src={hotel.image} alt={hotel.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
@@ -231,7 +326,8 @@ const Index = () => {
                   </div>
                 </CardContent>
               </Card>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </section>
