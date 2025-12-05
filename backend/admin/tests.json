@@ -1,0 +1,27 @@
+{
+  "tests": [
+    {
+      "name": "Get all pages",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Create new page with timestamp",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "slug": "test-{{timestamp}}",
+        "h1": "Test Page H1",
+        "title": "Test Page Title",
+        "description": "Test page description for SEO",
+        "content": "Test content"
+      },
+      "expectedStatus": 201,
+      "expectedBody": {
+        "h1": "Test Page H1"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
