@@ -66,13 +66,22 @@ const HotelCatalog = () => {
   const handleDeleteHotel = async (id: number) => {
     try {
       const response = await fetch(`${API_URL}?id=${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
-      if (!response.ok) throw new Error('Failed to delete hotel');
+      
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error('Delete failed:', errorData);
+        throw new Error('Failed to delete hotel');
+      }
+      
       await fetchHotels();
     } catch (error) {
       console.error('Error deleting hotel:', error);
-      alert('Ошибка при удалении отеля');
+      alert('Ошибка при удалении отеля: ' + (error instanceof Error ? error.message : 'Неизвестная ошибка'));
     }
   };
 

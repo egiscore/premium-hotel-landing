@@ -8,7 +8,21 @@ def get_db_connection():
     dsn = os.environ.get('DATABASE_URL')
     if not dsn:
         raise ValueError('DATABASE_URL not found')
-    return psycopg2.connect(dsn, cursor_factory=RealDictCursor)
+    conn = psycopg2.connect(dsn)
+    conn.set_session(autocommit=True)
+    return conn
+
+def escape_string(value):
+    if value is None:
+        return 'NULL'
+    if isinstance(value, (int, float)):
+        return str(value)
+    if isinstance(value, bool):
+        return 'TRUE' if value else 'FALSE'
+    if isinstance(value, list):
+        escaped_items = [escape_string(item) for item in value]
+        return "ARRAY[" + ", ".join(escaped_items) + "]"
+    return "'" + str(value).replace("'", "''") + "'"
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
@@ -31,17 +45,15 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     try:
         conn = get_db_connection()
-        cur = conn.cursor()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
         
         if method == 'GET':
             params = event.get('queryStringParameters') or {}
             hotel_id = params.get('id')
             
             if hotel_id:
-                cur.execute(
-                    'SELECT * FROM t_p19515115_premium_hotel_landin.hotels WHERE id = %s AND is_active = TRUE',
-                    (hotel_id,)
-                )
+                query = f"SELECT * FROM t_p19515115_premium_hotel_landin.hotels WHERE id = {escape_string(hotel_id)} AND is_active = TRUE"
+                cur.execute(query)
                 hotel = cur.fetchone()
                 
                 if not hotel:
@@ -59,9 +71,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'isBase64Encoded': False
                 }
             else:
-                cur.execute(
-                    'SELECT * FROM t_p19515115_premium_hotel_landin.hotels WHERE is_active = TRUE ORDER BY display_order, name'
-                )
+                query = 'SELECT * FROM t_p19515115_premium_hotel_landin.hotels WHERE is_active = TRUE ORDER BY display_order, name'
+                cur.execute(query)
                 hotels = cur.fetchall()
                 
                 return {
@@ -74,34 +85,34 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         elif method == 'POST':
             body = json.loads(event.get('body', '{}'))
             
-            cur.execute('''
+            query = f'''
                 INSERT INTO t_p19515115_premium_hotel_landin.hotels 
                 (name, location, address, price, description, image_url, features, amenities, 
                  rating, stars, rooms_count, phone, email, website, check_in_time, check_out_time, display_order)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (
+                    {escape_string(body.get('name'))},
+                    {escape_string(body.get('location'))},
+                    {escape_string(body.get('address'))},
+                    {escape_string(body.get('price'))},
+                    {escape_string(body.get('description'))},
+                    {escape_string(body.get('image_url'))},
+                    {escape_string(body.get('features', []))},
+                    {escape_string(body.get('amenities', []))},
+                    {escape_string(body.get('rating', 5.0))},
+                    {escape_string(body.get('stars', 5))},
+                    {escape_string(body.get('rooms_count'))},
+                    {escape_string(body.get('phone'))},
+                    {escape_string(body.get('email'))},
+                    {escape_string(body.get('website'))},
+                    {escape_string(body.get('check_in_time', '14:00'))},
+                    {escape_string(body.get('check_out_time', '12:00'))},
+                    {escape_string(body.get('display_order', 0))}
+                )
                 RETURNING *
-            ''', (
-                body.get('name'),
-                body.get('location'),
-                body.get('address'),
-                body.get('price'),
-                body.get('description'),
-                body.get('image_url'),
-                body.get('features', []),
-                body.get('amenities', []),
-                body.get('rating', 5.0),
-                body.get('stars', 5),
-                body.get('rooms_count'),
-                body.get('phone'),
-                body.get('email'),
-                body.get('website'),
-                body.get('check_in_time', '14:00'),
-                body.get('check_out_time', '12:00'),
-                body.get('display_order', 0)
-            ))
+            '''
             
+            cur.execute(query)
             new_hotel = cur.fetchone()
-            conn.commit()
             
             return {
                 'statusCode': 201,
@@ -122,38 +133,32 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'isBase64Encoded': False
                 }
             
-            cur.execute('''
+            query = f'''
                 UPDATE t_p19515115_premium_hotel_landin.hotels 
-                SET name = %s, location = %s, address = %s, price = %s, description = %s,
-                    image_url = %s, features = %s, amenities = %s, rating = %s, stars = %s,
-                    rooms_count = %s, phone = %s, email = %s, website = %s,
-                    check_in_time = %s, check_out_time = %s, display_order = %s,
+                SET name = {escape_string(body.get('name'))}, 
+                    location = {escape_string(body.get('location'))}, 
+                    address = {escape_string(body.get('address'))}, 
+                    price = {escape_string(body.get('price'))}, 
+                    description = {escape_string(body.get('description'))},
+                    image_url = {escape_string(body.get('image_url'))}, 
+                    features = {escape_string(body.get('features', []))}, 
+                    amenities = {escape_string(body.get('amenities', []))}, 
+                    rating = {escape_string(body.get('rating', 5.0))}, 
+                    stars = {escape_string(body.get('stars', 5))},
+                    rooms_count = {escape_string(body.get('rooms_count'))}, 
+                    phone = {escape_string(body.get('phone'))}, 
+                    email = {escape_string(body.get('email'))}, 
+                    website = {escape_string(body.get('website'))},
+                    check_in_time = {escape_string(body.get('check_in_time', '14:00'))}, 
+                    check_out_time = {escape_string(body.get('check_out_time', '12:00'))}, 
+                    display_order = {escape_string(body.get('display_order', 0))},
                     updated_at = CURRENT_TIMESTAMP
-                WHERE id = %s
+                WHERE id = {escape_string(hotel_id)}
                 RETURNING *
-            ''', (
-                body.get('name'),
-                body.get('location'),
-                body.get('address'),
-                body.get('price'),
-                body.get('description'),
-                body.get('image_url'),
-                body.get('features', []),
-                body.get('amenities', []),
-                body.get('rating', 5.0),
-                body.get('stars', 5),
-                body.get('rooms_count'),
-                body.get('phone'),
-                body.get('email'),
-                body.get('website'),
-                body.get('check_in_time', '14:00'),
-                body.get('check_out_time', '12:00'),
-                body.get('display_order', 0),
-                hotel_id
-            ))
+            '''
             
+            cur.execute(query)
             updated_hotel = cur.fetchone()
-            conn.commit()
             
             if not updated_hotel:
                 return {
@@ -182,15 +187,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'isBase64Encoded': False
                 }
             
-            cur.execute(
-                'UPDATE t_p19515115_premium_hotel_landin.hotels SET is_active = FALSE WHERE id = %s RETURNING id',
-                (hotel_id,)
-            )
+            check_query = f"SELECT id FROM t_p19515115_premium_hotel_landin.hotels WHERE id = {escape_string(hotel_id)} AND is_active = TRUE"
+            cur.execute(check_query)
+            exists = cur.fetchone()
             
-            deleted = cur.fetchone()
-            conn.commit()
-            
-            if not deleted:
+            if not exists:
                 return {
                     'statusCode': 404,
                     'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
@@ -198,10 +199,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'isBase64Encoded': False
                 }
             
+            update_query = f"UPDATE t_p19515115_premium_hotel_landin.hotels SET is_active = FALSE WHERE id = {escape_string(hotel_id)}"
+            cur.execute(update_query)
+            
             return {
                 'statusCode': 200,
                 'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-                'body': json.dumps({'success': True, 'id': deleted['id']}),
+                'body': json.dumps({'success': True, 'message': 'Hotel deleted successfully'}),
                 'isBase64Encoded': False
             }
         
@@ -220,6 +224,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'body': json.dumps({'error': str(e)}),
             'isBase64Encoded': False
         }
+    
     finally:
         if 'cur' in locals():
             cur.close()
