@@ -144,10 +144,22 @@ const AdminPanel = () => {
         id: editingId || undefined,
         name: hotelForm.name,
         location: hotelForm.location,
+        address: '',
         price: hotelForm.price,
+        description: '',
         image_url: hotelForm.image_url,
-        features: hotelForm.features.split(',').map(f => f.trim()),
-        gallery: hotelForm.gallery ? hotelForm.gallery.split(',').map(g => g.trim()) : []
+        features: hotelForm.features ? hotelForm.features.split(',').map(f => f.trim()).filter(f => f) : [],
+        amenities: [],
+        rating: 5.0,
+        stars: 5,
+        rooms_count: null,
+        phone: null,
+        email: null,
+        website: null,
+        check_in_time: '14:00',
+        check_out_time: '12:00',
+        display_order: 0,
+        gallery: hotelForm.gallery ? hotelForm.gallery.split(',').map(g => g.trim()).filter(g => g) : []
       };
 
       const response = await fetch(url, {
