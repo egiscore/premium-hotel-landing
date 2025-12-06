@@ -6,22 +6,15 @@ from psycopg2.extras import RealDictCursor
 
 def get_db_connection():
     dsn = os.environ.get('DATABASE_URL')
-    return psycopg2.connect(dsn)
-
-def verify_token(token: str, cur) -> bool:
-    if not token:
-        return False
-    cur.execute(
-        f"SELECT user_id FROM sessions WHERE token = '{token}' AND expires_at > NOW()"
-    )
-    return cur.fetchone() is not None
+    if not dsn:
+        raise ValueError('DATABASE_URL not found')
+    return psycopg2.connect(dsn, cursor_factory=RealDictCursor)
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    API для управления отелями в админ-панели
-    Позволяет создавать, читать, обновлять и удалять отели
+    API для управления каталогом отелей (получение, создание, обновление, удаление)
     '''
-    method: str = event.get('httpMethod', 'GET')
+    method = event.get('httpMethod', 'GET')
     
     if method == 'OPTIONS':
         return {
@@ -29,139 +22,206 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'headers': {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, X-Auth-Token',
+                'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Max-Age': '86400'
             },
             'body': '',
             'isBase64Encoded': False
         }
     
-    conn = get_db_connection()
-    cur = conn.cursor(cursor_factory=RealDictCursor)
-    
     try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
         if method == 'GET':
-            cur.execute('SELECT * FROM hotels ORDER BY id')
-            hotels = cur.fetchall()
-            return {
-                'statusCode': 200,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps([dict(hotel) for hotel in hotels], default=str),
-                'isBase64Encoded': False
-            }
-        
-        headers = event.get('headers', {})
-        token = headers.get('X-Auth-Token') or headers.get('x-auth-token')
-        
-        if not verify_token(token, cur):
-            return {
-                'statusCode': 401,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps({'error': 'Требуется авторизация'}),
-                'isBase64Encoded': False
-            }
-        
-        if method == 'POST':
-            body_data = json.loads(event.get('body', '{}'))
+            params = event.get('queryStringParameters') or {}
+            hotel_id = params.get('id')
             
-            name = body_data.get('name', '').replace("'", "''")
-            location = body_data.get('location', '').replace("'", "''")
-            price = body_data.get('price', 0)
-            image_url = body_data.get('image_url', '').replace("'", "''")
-            features_list = body_data.get('features', [])
-            features_str = ','.join([f"'{f.replace(chr(39), chr(39)+chr(39))}'" for f in features_list])
-            
-            gallery_list = body_data.get('gallery', [])
-            gallery_str = ','.join([f"'{g.replace(chr(39), chr(39)+chr(39))}'" for g in gallery_list]) if gallery_list else ''
-            
-            if gallery_str:
+            if hotel_id:
                 cur.execute(
-                    f"INSERT INTO hotels (name, location, price, image_url, features, gallery) VALUES ('{name}', '{location}', {price}, '{image_url}', ARRAY[{features_str}]::text[], ARRAY[{gallery_str}]::text[]) RETURNING *"
+                    'SELECT * FROM t_p19515115_premium_hotel_landin.hotels WHERE id = %s AND is_active = TRUE',
+                    (hotel_id,)
                 )
+                hotel = cur.fetchone()
+                
+                if not hotel:
+                    return {
+                        'statusCode': 404,
+                        'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                        'body': json.dumps({'error': 'Hotel not found'}),
+                        'isBase64Encoded': False
+                    }
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    'body': json.dumps(dict(hotel), ensure_ascii=False, default=str),
+                    'isBase64Encoded': False
+                }
             else:
                 cur.execute(
-                    f"INSERT INTO hotels (name, location, price, image_url, features, gallery) VALUES ('{name}', '{location}', {price}, '{image_url}', ARRAY[{features_str}]::text[], ARRAY[]::text[]) RETURNING *"
+                    'SELECT * FROM t_p19515115_premium_hotel_landin.hotels WHERE is_active = TRUE ORDER BY display_order, name'
                 )
+                hotels = cur.fetchall()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    'body': json.dumps([dict(h) for h in hotels], ensure_ascii=False, default=str),
+                    'isBase64Encoded': False
+                }
+        
+        elif method == 'POST':
+            body = json.loads(event.get('body', '{}'))
             
-            conn.commit()
+            cur.execute('''
+                INSERT INTO t_p19515115_premium_hotel_landin.hotels 
+                (name, location, address, price, description, image_url, features, amenities, 
+                 rating, stars, rooms_count, phone, email, website, check_in_time, check_out_time, display_order)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                RETURNING *
+            ''', (
+                body.get('name'),
+                body.get('location'),
+                body.get('address'),
+                body.get('price'),
+                body.get('description'),
+                body.get('image_url'),
+                body.get('features', []),
+                body.get('amenities', []),
+                body.get('rating', 5.0),
+                body.get('stars', 5),
+                body.get('rooms_count'),
+                body.get('phone'),
+                body.get('email'),
+                body.get('website'),
+                body.get('check_in_time', '14:00'),
+                body.get('check_out_time', '12:00'),
+                body.get('display_order', 0)
+            ))
+            
             new_hotel = cur.fetchone()
+            conn.commit()
             
             return {
                 'statusCode': 201,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps(dict(new_hotel), default=str),
+                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                'body': json.dumps(dict(new_hotel), ensure_ascii=False, default=str),
                 'isBase64Encoded': False
             }
         
         elif method == 'PUT':
-            path_params = event.get('pathParams', {})
-            hotel_id = path_params.get('id')
-            body_data = json.loads(event.get('body', '{}'))
+            body = json.loads(event.get('body', '{}'))
+            hotel_id = body.get('id')
             
-            name = body_data.get('name', '').replace("'", "''")
-            location = body_data.get('location', '').replace("'", "''")
-            price = body_data.get('price', 0)
-            image_url = body_data.get('image_url', '').replace("'", "''")
-            features_list = body_data.get('features', [])
-            features_str = ','.join([f"'{f.replace(chr(39), chr(39)+chr(39))}'" for f in features_list])
+            if not hotel_id:
+                return {
+                    'statusCode': 400,
+                    'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    'body': json.dumps({'error': 'Hotel ID is required'}),
+                    'isBase64Encoded': False
+                }
             
-            gallery_list = body_data.get('gallery', [])
-            gallery_str = ','.join([f"'{g.replace(chr(39), chr(39)+chr(39))}'" for g in gallery_list]) if gallery_list else ''
+            cur.execute('''
+                UPDATE t_p19515115_premium_hotel_landin.hotels 
+                SET name = %s, location = %s, address = %s, price = %s, description = %s,
+                    image_url = %s, features = %s, amenities = %s, rating = %s, stars = %s,
+                    rooms_count = %s, phone = %s, email = %s, website = %s,
+                    check_in_time = %s, check_out_time = %s, display_order = %s,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE id = %s
+                RETURNING *
+            ''', (
+                body.get('name'),
+                body.get('location'),
+                body.get('address'),
+                body.get('price'),
+                body.get('description'),
+                body.get('image_url'),
+                body.get('features', []),
+                body.get('amenities', []),
+                body.get('rating', 5.0),
+                body.get('stars', 5),
+                body.get('rooms_count'),
+                body.get('phone'),
+                body.get('email'),
+                body.get('website'),
+                body.get('check_in_time', '14:00'),
+                body.get('check_out_time', '12:00'),
+                body.get('display_order', 0),
+                hotel_id
+            ))
             
-            if gallery_str:
-                cur.execute(
-                    f"UPDATE hotels SET name = '{name}', location = '{location}', price = {price}, image_url = '{image_url}', features = ARRAY[{features_str}]::text[], gallery = ARRAY[{gallery_str}]::text[], updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id} RETURNING *"
-                )
-            else:
-                cur.execute(
-                    f"UPDATE hotels SET name = '{name}', location = '{location}', price = {price}, image_url = '{image_url}', features = ARRAY[{features_str}]::text[], gallery = ARRAY[]::text[], updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id} RETURNING *"
-                )
-            
-            conn.commit()
             updated_hotel = cur.fetchone()
+            conn.commit()
+            
+            if not updated_hotel:
+                return {
+                    'statusCode': 404,
+                    'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    'body': json.dumps({'error': 'Hotel not found'}),
+                    'isBase64Encoded': False
+                }
             
             return {
                 'statusCode': 200,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps(dict(updated_hotel), default=str),
+                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                'body': json.dumps(dict(updated_hotel), ensure_ascii=False, default=str),
                 'isBase64Encoded': False
             }
         
         elif method == 'DELETE':
-            path_params = event.get('pathParams', {})
-            hotel_id = path_params.get('id')
+            params = event.get('queryStringParameters') or {}
+            hotel_id = params.get('id')
             
-            cur.execute(f'UPDATE hotels SET updated_at = CURRENT_TIMESTAMP WHERE id = {hotel_id}')
+            if not hotel_id:
+                return {
+                    'statusCode': 400,
+                    'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    'body': json.dumps({'error': 'Hotel ID is required'}),
+                    'isBase64Encoded': False
+                }
+            
+            cur.execute(
+                'UPDATE t_p19515115_premium_hotel_landin.hotels SET is_active = FALSE WHERE id = %s RETURNING id',
+                (hotel_id,)
+            )
+            
+            deleted = cur.fetchone()
             conn.commit()
             
+            if not deleted:
+                return {
+                    'statusCode': 404,
+                    'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    'body': json.dumps({'error': 'Hotel not found'}),
+                    'isBase64Encoded': False
+                }
+            
             return {
-                'statusCode': 204,
-                'headers': {
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': '',
+                'statusCode': 200,
+                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                'body': json.dumps({'success': True, 'id': deleted['id']}),
+                'isBase64Encoded': False
+            }
+        
+        else:
+            return {
+                'statusCode': 405,
+                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                'body': json.dumps({'error': 'Method not allowed'}),
                 'isBase64Encoded': False
             }
     
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            'body': json.dumps({'error': str(e)}),
+            'isBase64Encoded': False
+        }
     finally:
-        cur.close()
-        conn.close()
-    
-    return {
-        'statusCode': 405,
-        'headers': {'Content-Type': 'application/json'},
-        'body': json.dumps({'error': 'Method not allowed'}),
-        'isBase64Encoded': False
-    }
+        if 'cur' in locals():
+            cur.close()
+        if 'conn' in locals():
+            conn.close()

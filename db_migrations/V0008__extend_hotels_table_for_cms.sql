@@ -1,0 +1,18 @@
+-- Add new columns to hotels table for full CMS functionality
+ALTER TABLE t_p19515115_premium_hotel_landin.hotels 
+ADD COLUMN IF NOT EXISTS address VARCHAR(500),
+ADD COLUMN IF NOT EXISTS description TEXT,
+ADD COLUMN IF NOT EXISTS amenities TEXT[],
+ADD COLUMN IF NOT EXISTS rating DECIMAL(2,1) DEFAULT 5.0,
+ADD COLUMN IF NOT EXISTS stars INTEGER DEFAULT 5,
+ADD COLUMN IF NOT EXISTS rooms_count INTEGER,
+ADD COLUMN IF NOT EXISTS phone VARCHAR(50),
+ADD COLUMN IF NOT EXISTS email VARCHAR(255),
+ADD COLUMN IF NOT EXISTS website VARCHAR(500),
+ADD COLUMN IF NOT EXISTS check_in_time VARCHAR(20) DEFAULT '14:00',
+ADD COLUMN IF NOT EXISTS check_out_time VARCHAR(20) DEFAULT '12:00',
+ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT TRUE,
+ADD COLUMN IF NOT EXISTS display_order INTEGER DEFAULT 0;
+
+-- Create index for active hotels
+CREATE INDEX IF NOT EXISTS idx_hotels_active ON t_p19515115_premium_hotel_landin.hotels(is_active, display_order);
