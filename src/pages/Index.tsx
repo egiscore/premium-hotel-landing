@@ -11,6 +11,7 @@ import HeroSection from "@/components/HeroSection";
 import HotelCatalog from "@/components/HotelCatalog";
 import SPASection from "@/components/SPASection";
 import ContactForm from "@/components/ContactForm";
+import { useNavigate } from "react-router-dom";
 
 const packages = [
   {
@@ -67,6 +68,8 @@ const reviews = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
+  
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -123,6 +126,13 @@ const Index = () => {
                 className="text-sm hover:text-gold transition-colors"
               >
                 Контакты
+              </button>
+              <button
+                onClick={() => navigate('/admin')}
+                className="text-sm hover:text-gold transition-colors flex items-center gap-1"
+              >
+                <Icon name="Settings" size={16} />
+                Админ
               </button>
               <Button className="bg-gold hover:bg-gold/90 text-dark">
                 +7 (495) 123-45-67

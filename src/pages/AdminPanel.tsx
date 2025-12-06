@@ -137,24 +137,25 @@ const AdminPanel = () => {
 
   const handleSaveHotel = async (e: React.FormEvent) => {
     e.preventDefault();
-    const token = getAuthToken();
     
     try {
-      const url = editingId 
-        ? `https://functions.poehali.dev/82ea708f-5e97-4f6c-87b6-720c95d9d5db/${editingId}`
-        : 'https://functions.poehali.dev/82ea708f-5e97-4f6c-87b6-720c95d9d5db';
+      const url = 'https://functions.poehali.dev/82ea708f-5e97-4f6c-87b6-720c95d9d5db';
+      const body = {
+        id: editingId || undefined,
+        name: hotelForm.name,
+        location: hotelForm.location,
+        price: hotelForm.price,
+        image_url: hotelForm.image_url,
+        features: hotelForm.features.split(',').map(f => f.trim()),
+        gallery: hotelForm.gallery ? hotelForm.gallery.split(',').map(g => g.trim()) : []
+      };
 
       const response = await fetch(url, {
         method: editingId ? 'PUT' : 'POST',
         headers: { 
-          'Content-Type': 'application/json',
-          'X-Auth-Token': token || ''
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          ...hotelForm,
-          features: hotelForm.features.split(',').map(f => f.trim()),
-          gallery: hotelForm.gallery ? hotelForm.gallery.split(',').map(g => g.trim()) : []
-        })
+        body: JSON.stringify(body)
       });
 
       if (response.ok) {
@@ -163,9 +164,32 @@ const AdminPanel = () => {
         setIsEditing(false);
         setEditingId(null);
         fetchHotels();
+      } else {
+        const errorData = await response.json();
+        toast({ title: 'Ошибка', description: errorData.error || 'Не удалось сохранить отель', variant: 'destructive' });
       }
     } catch (error) {
+      console.error('Error saving hotel:', error);
       toast({ title: 'Ошибка', description: 'Не удалось сохранить отель', variant: 'destructive' });
+    }
+  };
+
+  const handleDeleteHotel = async (id: number) => {
+    try {
+      const response = await fetch(`https://functions.poehali.dev/82ea708f-5e97-4f6c-87b6-720c95d9d5db?id=${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        toast({ title: 'Успешно', description: 'Отель удален' });
+        fetchHotels();
+      } else {
+        const errorData = await response.json();
+        toast({ title: 'Ошибка', description: errorData.error || 'Не удалось удалить отель', variant: 'destructive' });
+      }
+    } catch (error) {
+      console.error('Error deleting hotel:', error);
+      toast({ title: 'Ошибка', description: 'Не удалось удалить отель', variant: 'destructive' });
     }
   };
 
@@ -282,6 +306,7 @@ const AdminPanel = () => {
             setEditingId={setEditingId}
             setHotelForm={setHotelForm}
             handleSaveHotel={handleSaveHotel}
+            handleDeleteHotel={handleDeleteHotel}
           />
         )}
 

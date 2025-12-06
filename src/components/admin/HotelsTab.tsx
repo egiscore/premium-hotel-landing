@@ -32,6 +32,7 @@ interface HotelsTabProps {
   setEditingId: (value: number | null) => void;
   setHotelForm: (value: HotelForm) => void;
   handleSaveHotel: (e: React.FormEvent) => void;
+  handleDeleteHotel: (id: number) => void;
 }
 
 const HotelsTab = ({
@@ -43,6 +44,7 @@ const HotelsTab = ({
   setEditingId,
   setHotelForm,
   handleSaveHotel,
+  handleDeleteHotel,
 }: HotelsTabProps) => {
   return (
     <div>
@@ -126,24 +128,37 @@ const HotelsTab = ({
                     ))}
                   </div>
                 </div>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => {
-                    setHotelForm({
-                      name: hotel.name,
-                      location: hotel.location,
-                      price: hotel.price,
-                      image_url: hotel.image_url,
-                      features: hotel.features.join(', '),
-                      gallery: (hotel.gallery || []).join(', ')
-                    });
-                    setEditingId(hotel.id);
-                    setIsEditing(true);
-                  }}
-                >
-                  <Icon name="Pencil" size={16} />
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => {
+                      setHotelForm({
+                        name: hotel.name,
+                        location: hotel.location,
+                        price: hotel.price,
+                        image_url: hotel.image_url,
+                        features: hotel.features.join(', '),
+                        gallery: (hotel.gallery || []).join(', ')
+                      });
+                      setEditingId(hotel.id);
+                      setIsEditing(true);
+                    }}
+                  >
+                    <Icon name="Pencil" size={16} />
+                  </Button>
+                  <Button 
+                    variant="destructive" 
+                    size="sm" 
+                    onClick={() => {
+                      if (confirm(`Удалить отель "${hotel.name}"?`)) {
+                        handleDeleteHotel(hotel.id);
+                      }
+                    }}
+                  >
+                    <Icon name="Trash2" size={16} />
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>

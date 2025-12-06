@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import HotelGallery from '@/components/HotelGallery';
-import AdminPanel from '@/components/AdminPanel';
 
 const API_URL = 'https://functions.poehali.dev/82ea708f-5e97-4f6c-87b6-720c95d9d5db';
 
@@ -32,7 +31,6 @@ interface Hotel {
 const HotelCatalog = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showAdmin, setShowAdmin] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState('Все');
   const [selectedPriceRange, setSelectedPriceRange] = useState<{ min: number; max: number } | null>(null);
 
@@ -63,60 +61,6 @@ const HotelCatalog = () => {
     }
   };
 
-  const handleDeleteHotel = async (id: number) => {
-    try {
-      const response = await fetch(`${API_URL}?id=${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error('Delete failed:', errorData);
-        throw new Error('Failed to delete hotel');
-      }
-      
-      await fetchHotels();
-    } catch (error) {
-      console.error('Error deleting hotel:', error);
-      alert('Ошибка при удалении отеля: ' + (error instanceof Error ? error.message : 'Неизвестная ошибка'));
-    }
-  };
-
-  const handleUpdateHotel = async (hotel: Hotel) => {
-    try {
-      const response = await fetch(API_URL, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(hotel)
-      });
-      if (!response.ok) throw new Error('Failed to update hotel');
-      await fetchHotels();
-      setShowAdmin(false);
-    } catch (error) {
-      console.error('Error updating hotel:', error);
-      alert('Ошибка при обновлении отеля');
-    }
-  };
-
-  const handleCreateHotel = async (hotel: Omit<Hotel, 'id'>) => {
-    try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(hotel)
-      });
-      if (!response.ok) throw new Error('Failed to create hotel');
-      await fetchHotels();
-      setShowAdmin(false);
-    } catch (error) {
-      console.error('Error creating hotel:', error);
-      alert('Ошибка при создании отеля');
-    }
-  };
-
   const filteredHotels = hotels.filter(hotel => {
     const locationMatch = selectedLocation === 'Все' || hotel.location === selectedLocation;
     const priceMatch = !selectedPriceRange || (hotel.price >= selectedPriceRange.min && hotel.price <= selectedPriceRange.max);
@@ -137,18 +81,7 @@ const HotelCatalog = () => {
     <section id="catalog" className="py-20 px-6 bg-gray-50">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <h2 className="text-5xl font-light">Каталог премиум-отелей</h2>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setShowAdmin(true)}
-              className="text-gray-400 hover:text-gold"
-              title="Управление отелями"
-            >
-              <Icon name="Settings" size={24} />
-            </Button>
-          </div>
+          <h2 className="text-5xl font-light mb-4">Каталог премиум-отелей</h2>
           <p className="text-gray-600 text-lg">Избранные отели Москвы для самых взыскательных гостей</p>
         </div>
         
@@ -258,16 +191,6 @@ const HotelCatalog = () => {
           )}
         </div>
       </div>
-      
-      {showAdmin && (
-        <AdminPanel
-          hotels={hotels}
-          onDelete={handleDeleteHotel}
-          onUpdate={handleUpdateHotel}
-          onCreate={handleCreateHotel}
-          onClose={() => setShowAdmin(false)}
-        />
-      )}
     </section>
   );
 };
