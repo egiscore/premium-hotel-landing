@@ -1,18 +1,18 @@
 import json
 import os
 from typing import Dict, Any
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
 
 def get_db_connection():
     dsn = os.environ.get('DATABASE_URL')
-    return psycopg2.connect(dsn)
+    return psycopg.connect(dsn, autocommit=True)
 
 def verify_token(token: str, cur) -> bool:
     if not token:
         return False
     cur.execute(
-        f"SELECT user_id FROM sessions WHERE token = '{token}' AND expires_at > NOW()"
+        "SELECT user_id FROM sessions WHERE token = %s AND expires_at > NOW()",
+        (token,)
     )
     return cur.fetchone() is not None
 
@@ -36,100 +36,113 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
     
-    conn = get_db_connection()
-    cur = conn.cursor(cursor_factory=RealDictCursor)
-    
     try:
-        if method == 'GET':
-            params = event.get('queryStringParameters') or {}
-            page = params.get('page')
-            
-            if page:
-                cur.execute(f"SELECT * FROM site_content WHERE page = '{page}' ORDER BY key")
-            else:
-                cur.execute('SELECT * FROM site_content ORDER BY page, key')
-            
-            content = cur.fetchall()
-            return {
-                'statusCode': 200,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps([dict(item) for item in content], default=str),
-                'isBase64Encoded': False
-            }
-        
-        headers = event.get('headers', {})
-        token = headers.get('X-Auth-Token') or headers.get('x-auth-token')
-        
-        if not verify_token(token, cur):
-            return {
-                'statusCode': 401,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps({'error': 'Требуется авторизация'}),
-                'isBase64Encoded': False
-            }
-        
-        if method == 'PUT':
-            path_params = event.get('pathParams', {})
-            content_id = path_params.get('id')
-            body_data = json.loads(event.get('body', '{}'))
-            
-            value = body_data.get('value', '').replace("'", "''")
-            description = body_data.get('description', '').replace("'", "''")
-            page_val = body_data.get('page', '').replace("'", "''")
-            
-            cur.execute(
-                f"UPDATE site_content SET value = '{value}', description = '{description}', page = '{page_val}', updated_at = CURRENT_TIMESTAMP WHERE id = {content_id} RETURNING *"
-            )
-            conn.commit()
-            updated_content = cur.fetchone()
-            
-            return {
-                'statusCode': 200,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps(dict(updated_content), default=str),
-                'isBase64Encoded': False
-            }
-        
-        elif method == 'POST':
-            body_data = json.loads(event.get('body', '{}'))
-            
-            key = body_data.get('key', '').replace("'", "''")
-            value = body_data.get('value', '').replace("'", "''")
-            description = body_data.get('description', '').replace("'", "''")
-            page_val = body_data.get('page', '').replace("'", "''")
-            
-            cur.execute(
-                f"INSERT INTO site_content (key, value, description, page) VALUES ('{key}', '{value}', '{description}', '{page_val}') RETURNING *"
-            )
-            conn.commit()
-            new_content = cur.fetchone()
-            
-            return {
-                'statusCode': 201,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps(dict(new_content), default=str),
-                'isBase64Encoded': False
-            }
+        with get_db_connection() as conn:
+            with conn.cursor() as cur:
+                
+                if method == 'GET':
+                    params = event.get('queryStringParameters') or {}
+                    page = params.get('page')
+                    
+                    if page:
+                        cur.execute("SELECT * FROM site_content WHERE page = %s ORDER BY key", (page,))
+                    else:
+                        cur.execute('SELECT * FROM site_content ORDER BY page, key')
+                    
+                    content = cur.fetchall()
+                    columns = [desc[0] for desc in cur.description]
+                    content_list = [dict(zip(columns, row)) for row in content]
+                    
+                    return {
+                        'statusCode': 200,
+                        'headers': {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        'body': json.dumps(content_list, default=str),
+                        'isBase64Encoded': False
+                    }
+                
+                headers = event.get('headers', {})
+                token = headers.get('X-Auth-Token') or headers.get('x-auth-token')
+                
+                if not verify_token(token, cur):
+                    return {
+                        'statusCode': 401,
+                        'headers': {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        'body': json.dumps({'error': 'Требуется авторизация'}),
+                        'isBase64Encoded': False
+                    }
+                
+                if method == 'PUT':
+                    path_params = event.get('pathParams', {})
+                    content_id = path_params.get('id')
+                    body_data = json.loads(event.get('body', '{}'))
+                    
+                    cur.execute(
+                        "UPDATE site_content SET value = %s, description = %s, page = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s RETURNING *",
+                        (
+                            body_data.get('value', ''),
+                            body_data.get('description', ''),
+                            body_data.get('page', ''),
+                            content_id
+                        )
+                    )
+                    updated_content = cur.fetchone()
+                    columns = [desc[0] for desc in cur.description]
+                    content_dict = dict(zip(columns, updated_content))
+                    
+                    return {
+                        'statusCode': 200,
+                        'headers': {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        'body': json.dumps(content_dict, default=str),
+                        'isBase64Encoded': False
+                    }
+                
+                elif method == 'POST':
+                    body_data = json.loads(event.get('body', '{}'))
+                    
+                    cur.execute(
+                        "INSERT INTO site_content (page, key, value, description) VALUES (%s, %s, %s, %s) RETURNING *",
+                        (
+                            body_data.get('page', ''),
+                            body_data.get('key', ''),
+                            body_data.get('value', ''),
+                            body_data.get('description', '')
+                        )
+                    )
+                    new_content = cur.fetchone()
+                    columns = [desc[0] for desc in cur.description]
+                    content_dict = dict(zip(columns, new_content))
+                    
+                    return {
+                        'statusCode': 201,
+                        'headers': {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        'body': json.dumps(content_dict, default=str),
+                        'isBase64Encoded': False
+                    }
+                
+                else:
+                    return {
+                        'statusCode': 405,
+                        'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                        'body': json.dumps({'error': 'Method not allowed'}),
+                        'isBase64Encoded': False
+                    }
     
-    finally:
-        cur.close()
-        conn.close()
-    
-    return {
-        'statusCode': 405,
-        'headers': {'Content-Type': 'application/json'},
-        'body': json.dumps({'error': 'Method not allowed'}),
-        'isBase64Encoded': False
-    }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            'body': json.dumps({'error': str(e)}),
+            'isBase64Encoded': False
+        }
