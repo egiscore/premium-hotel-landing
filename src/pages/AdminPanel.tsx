@@ -14,6 +14,7 @@ interface Hotel {
   name: string;
   location: string;
   price: number;
+  description?: string;
   image_url: string;
   features: string[];
   gallery: string[];
@@ -50,6 +51,7 @@ const AdminPanel = () => {
     name: '',
     location: '',
     price: 0,
+    description: '',
     image_url: '',
     features: '',
     gallery: ''
@@ -146,7 +148,7 @@ const AdminPanel = () => {
         location: hotelForm.location,
         address: '',
         price: hotelForm.price,
-        description: '',
+        description: hotelForm.description,
         image_url: hotelForm.image_url,
         features: hotelForm.features ? hotelForm.features.split(',').map(f => f.trim()).filter(f => f) : [],
         amenities: [],
@@ -172,7 +174,7 @@ const AdminPanel = () => {
 
       if (response.ok) {
         toast({ title: 'Успешно', description: editingId ? 'Отель обновлен' : 'Отель создан' });
-        setHotelForm({ name: '', location: '', price: 0, image_url: '', features: '', gallery: '' });
+        setHotelForm({ name: '', location: '', price: 0, description: '', image_url: '', features: '', gallery: '' });
         setIsEditing(false);
         setEditingId(null);
         fetchHotels();

@@ -9,6 +9,7 @@ interface Hotel {
   name: string;
   location: string;
   price: number;
+  description?: string;
   image_url: string;
   features: string[];
   gallery: string[];
@@ -18,6 +19,7 @@ interface HotelForm {
   name: string;
   location: string;
   price: number;
+  description: string;
   image_url: string;
   features: string;
   gallery: string;
@@ -53,7 +55,7 @@ const HotelsTab = ({
         <Button onClick={() => {
           setIsEditing(!isEditing);
           setEditingId(null);
-          setHotelForm({ name: '', location: '', price: 0, image_url: '', features: '', gallery: '' });
+          setHotelForm({ name: '', location: '', price: 0, description: '', image_url: '', features: '', gallery: '' });
         }}>
           <Icon name={isEditing ? "X" : "Plus"} size={20} className="mr-2" />
           {isEditing ? 'Отмена' : 'Добавить отель'}
@@ -85,6 +87,12 @@ const HotelsTab = ({
                 placeholder="Цена"
                 value={hotelForm.price}
                 onChange={(e) => setHotelForm({ ...hotelForm, price: Number(e.target.value) })}
+              />
+              <Textarea
+                placeholder="Описание отеля"
+                value={hotelForm.description}
+                onChange={(e) => setHotelForm({ ...hotelForm, description: e.target.value })}
+                rows={3}
               />
               <Input
                 required
@@ -137,6 +145,7 @@ const HotelsTab = ({
                         name: hotel.name,
                         location: hotel.location,
                         price: hotel.price,
+                        description: hotel.description || '',
                         image_url: hotel.image_url,
                         features: hotel.features.join(', '),
                         gallery: (hotel.gallery || []).join(', ')
