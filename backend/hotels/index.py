@@ -21,6 +21,8 @@ def escape_sql_value(value):
     if isinstance(value, (int, float)):
         return str(value)
     if isinstance(value, list):
+        if len(value) == 0:
+            return "ARRAY[]::text[]"
         escaped_items = [escape_sql_value(item) for item in value]
         return "ARRAY[" + ", ".join(escaped_items) + "]"
     # String escaping
