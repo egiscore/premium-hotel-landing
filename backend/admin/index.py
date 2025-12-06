@@ -115,8 +115,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'isBase64Encoded': False
                 }
             
-            path_params = event.get('pathParams', {})
-            page_id = path_params.get('id')
+            params = event.get('queryStringParameters') or {}
+            page_id = params.get('id')
+            
+            if not page_id:
+                path_params = event.get('pathParams', {})
+                page_id = path_params.get('id')
+            
             body_data = json.loads(event.get('body', '{}'))
             
             query = f'''UPDATE pages 
@@ -132,6 +137,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             cur.execute(query)
             updated_page = cur.fetchone()
             
+            if not updated_page:
+                return {
+                    'statusCode': 404,
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'body': json.dumps({'error': 'Страница не найдена'}),
+                    'isBase64Encoded': False
+                }
+            
             return {
                 'statusCode': 200,
                 'headers': {
@@ -143,8 +159,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             }
         
         elif method == 'DELETE':
-            path_params = event.get('pathParams', {})
-            page_id = path_params.get('id')
+            params = event.get('queryStringParameters') or {}
+            page_id = params.get('id')
+            
+            if not page_id:
+                path_params = event.get('pathParams', {})
+                page_id = path_params.get('id')
             
             headers = event.get('headers', {})
             token = headers.get('X-Auth-Token') or headers.get('x-auth-token')

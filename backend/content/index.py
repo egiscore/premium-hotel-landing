@@ -84,8 +84,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             }
         
         if method == 'PUT':
-            path_params = event.get('pathParams', {})
-            content_id = path_params.get('id')
+            params = event.get('queryStringParameters') or {}
+            content_id = params.get('id')
+            
+            if not content_id:
+                path_params = event.get('pathParams', {})
+                content_id = path_params.get('id')
+            
             body_data = json.loads(event.get('body', '{}'))
             
             query = f'''UPDATE site_content 
@@ -98,6 +103,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             cur.execute(query)
             updated_content = cur.fetchone()
+            
+            if not updated_content:
+                return {
+                    'statusCode': 404,
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'body': json.dumps({'error': 'Контент не найден'}),
+                    'isBase64Encoded': False
+                }
             
             return {
                 'statusCode': 200,

@@ -211,7 +211,7 @@ const AdminPanel = () => {
     
     try {
       const url = editingId 
-        ? `https://functions.poehali.dev/d7ec4198-c892-4d40-90a7-6b891932711b/${editingId}`
+        ? `https://functions.poehali.dev/d7ec4198-c892-4d40-90a7-6b891932711b?id=${editingId}`
         : 'https://functions.poehali.dev/d7ec4198-c892-4d40-90a7-6b891932711b';
 
       const response = await fetch(url, {
@@ -229,6 +229,9 @@ const AdminPanel = () => {
         setIsEditing(false);
         setEditingId(null);
         fetchPages();
+      } else {
+        const errorData = await response.json();
+        toast({ title: 'Ошибка', description: errorData.error || 'Не удалось сохранить страницу', variant: 'destructive' });
       }
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось сохранить страницу', variant: 'destructive' });
@@ -241,7 +244,7 @@ const AdminPanel = () => {
     
     try {
       const url = editingId 
-        ? `https://functions.poehali.dev/9060a72f-0e7c-4252-ba69-f0e562211c8e/${editingId}`
+        ? `https://functions.poehali.dev/9060a72f-0e7c-4252-ba69-f0e562211c8e?id=${editingId}`
         : 'https://functions.poehali.dev/9060a72f-0e7c-4252-ba69-f0e562211c8e';
 
       const response = await fetch(url, {
@@ -259,6 +262,9 @@ const AdminPanel = () => {
         setIsEditing(false);
         setEditingId(null);
         fetchContent();
+      } else {
+        const errorData = await response.json();
+        toast({ title: 'Ошибка', description: errorData.error || 'Не удалось сохранить контент', variant: 'destructive' });
       }
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось сохранить контент', variant: 'destructive' });
