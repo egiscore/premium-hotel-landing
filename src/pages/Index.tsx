@@ -69,7 +69,7 @@ const reviews = [
 
 const Index = () => {
   const navigate = useNavigate();
-  
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -80,7 +80,9 @@ const Index = () => {
   const handleBookPackage = (packageTitle: string) => {
     scrollToSection("contact");
     setTimeout(() => {
-      const messageInput = document.querySelector('textarea[placeholder*="сообщение"]') as HTMLTextAreaElement;
+      const messageInput = document.querySelector(
+        'textarea[placeholder*="сообщение"]',
+      ) as HTMLTextAreaElement;
       if (messageInput) {
         messageInput.value = `Здравствуйте! Хочу забронировать пакет "${packageTitle}".`;
         messageInput.focus();
@@ -128,7 +130,7 @@ const Index = () => {
                 Контакты
               </button>
               <button
-                onClick={() => navigate('/admin')}
+                onClick={() => navigate("/admin")}
                 className="text-sm hover:text-gold transition-colors flex items-center gap-1"
               >
                 <Icon name="Settings" size={16} />
@@ -186,7 +188,7 @@ const Index = () => {
                       </div>
                     ))}
                   </div>
-                  <Button 
+                  <Button
                     className="w-full bg-gold hover:bg-gold/90 text-dark"
                     onClick={() => handleBookPackage(pkg.title)}
                   >
@@ -303,7 +305,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-            <p>© 2024 Premium Hotels Moscow. Все права защищены.</p>
+            <p>© 2024 Booking Premium Hotels Moscow. Все права защищены.</p>
           </div>
         </div>
       </footer>
