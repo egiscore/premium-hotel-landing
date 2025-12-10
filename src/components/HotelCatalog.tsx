@@ -232,7 +232,7 @@ const HotelCatalog = () => {
                         }
                       }}
                     >
-                      Получить презентацию
+                      Презентация
                     </Button>
                   </div>
                 </CardContent>
