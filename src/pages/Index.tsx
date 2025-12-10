@@ -129,13 +129,6 @@ const Index = () => {
               >
                 Контакты
               </button>
-              <button
-                onClick={() => navigate("/admin")}
-                className="text-sm hover:text-gold transition-colors flex items-center gap-1"
-              >
-                <Icon name="Settings" size={16} />
-                Админ
-              </button>
               <Button className="bg-gold hover:bg-gold/90 text-dark">
                 +7 (495) 123-45-67
               </Button>
