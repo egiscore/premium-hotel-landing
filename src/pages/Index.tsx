@@ -270,11 +270,11 @@ const Index = () => {
               <ul className="space-y-2 text-sm text-gray-400">
                 <li className="flex items-center gap-2">
                   <Icon name="Phone" size={14} />
-                  +7 (495) 123-45-67
+                  +7 (495) 179-74-44
                 </li>
                 <li className="flex items-center gap-2">
                   <Icon name="Mail" size={14} />
-                  info@premiumhotels.ru
+                  booking@booking.events
                 </li>
                 <li className="flex items-center gap-2">
                   <Icon name="MapPin" size={14} />
