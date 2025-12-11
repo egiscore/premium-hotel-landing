@@ -40,17 +40,17 @@ const staticHotels: Hotel[] = [
     address: "Тверская ул., 3",
     price: 65000,
     description: "Терраса O2 Lounge с панорамными видами на Кремль. Роскошные номера с эксклюзивным дизайном и безупречным сервисом.",
-    image_url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&q=80",
     features: ["O2 Lounge терраса", "Вид на Кремль", "Президентские люксы", "SPA-центр"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&q=80",
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80",
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80",
-      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&q=80",
+      "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&q=80",
       "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80",
-      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80",
-      "https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?w=1200&q=80"
+      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=1200&q=80"
     ]
   },
   {
@@ -60,17 +60,17 @@ const staticHotels: Hotel[] = [
     address: "Охотный ряд, 2",
     price: 70000,
     description: "Историческое здание на Манежной площади. Президентские люксы с видом на Кремль и роскошный бассейн.",
-    image_url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
     features: ["Президентские люксы", "Бассейн", "Ресторан Quadrum", "Консьерж 24/7"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80",
       "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80",
-      "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=1200&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80",
       "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80",
-      "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&q=80",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80",
-      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200&q=80"
+      "https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?w=1200&q=80"
     ]
   },
   {
@@ -80,17 +80,17 @@ const staticHotels: Hotel[] = [
     address: "Никольская ул., 12",
     price: 68000,
     description: "Гранд-лобби в классическом стиле. Легендарный butler service — персональный дворецкий для каждого гостя.",
-    image_url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=800&q=80",
     features: ["Butler service", "Гранд-лобби", "Люксы с историей", "St. Regis Bar"],
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80",
       "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=1200&q=80",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80",
+      "https://images.unsplash.com/photo-1549294413-26f195200c16?w=1200&q=80",
       "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&q=80",
       "https://images.unsplash.com/photo-1609766975528-20be4f0e0e8c?w=1200&q=80",
-      "https://images.unsplash.com/photo-1631049552240-59c37f38802b?w=1200&q=80",
-      "https://images.unsplash.com/photo-1549294413-26f195200c16?w=1200&q=80"
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&q=80"
     ]
   },
   {
@@ -100,17 +100,17 @@ const staticHotels: Hotel[] = [
     address: "Неглинная ул., 4",
     price: 58000,
     description: "Фасад с видом на Неглинную. Легендарный Conservatory Lounge Bar с роялем и живой музыкой.",
-    image_url: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
     features: ["Conservatory Lounge", "Живая музыка", "Ararat Restaurant", "Wellness-центр"],
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80",
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&q=80",
       "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=1200&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80",
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
       "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200&q=80",
-      "https://images.unsplash.com/photo-1587985064135-0366536eab42?w=1200&q=80"
+      "https://images.unsplash.com/photo-1587985064135-0366536eab42?w=1200&q=80",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80"
     ]
   },
   {
@@ -120,17 +120,17 @@ const staticHotels: Hotel[] = [
     address: "Космодамианская наб., 52/6",
     price: 42000,
     description: "Небоскрёб Красные Холмы с панорамами на Москву с высоты птичьего полёта. Современный дизайн и швейцарское качество.",
-    image_url: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80",
     features: ["Панорамные виды", "Sky Lounge", "Фитнес-центр", "Бизнес-залы"],
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=80",
       "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=80",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80",
-      "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=1200&q=80",
       "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200&q=80",
-      "https://images.unsplash.com/photo-1631049035182-249067d7618e?w=1200&q=80"
+      "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=1200&q=80",
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80"
     ]
   },
   {
@@ -140,16 +140,16 @@ const staticHotels: Hotel[] = [
     address: "Театральный проезд, 2",
     price: 55000,
     description: "Историческая мозаика в стиле модерн. Витражные залы и легендарный ресторан с куполом начала XX века.",
-    image_url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1549294413-26f195200c16?w=800&q=80",
     features: ["Мозаика модерн", "Витражные залы", "Историческая архитектура", "Купольный ресторан"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://images.unsplash.com/photo-1549294413-26f195200c16?w=1200&q=80",
       "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80",
-      "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=1200&q=80",
       "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=1200&q=80",
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1200&q=80",
       "https://images.unsplash.com/photo-1609766975528-20be4f0e0e8c?w=1200&q=80",
+      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1200&q=80",
       "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=80"
     ]
   },
@@ -160,17 +160,17 @@ const staticHotels: Hotel[] = [
     address: "Петровка ул., 7",
     price: 85000,
     description: "Итальянская роскошь в самом сердце Москвы. Золото и мрамор в спа-центре с эксклюзивными процедурами.",
-    image_url: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?w=800&q=80",
     features: ["Bulgari SPA", "Золото и мрамор", "Итальянский ресторан", "Эксклюзивный дизайн"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?w=1200&q=80",
       "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80",
       "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&q=80",
-      "https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?w=1200&q=80",
       "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=1200&q=80",
       "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=80",
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=80"
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80"
     ]
   },
   {
@@ -180,17 +180,17 @@ const staticHotels: Hotel[] = [
     address: "Большая Никитская ул., 7",
     price: 62000,
     description: "Восточная эстетика в сочетании с московской историей. Терраса на крыше с видами на центр города.",
-    image_url: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1559599238-1c99d946d8d5?w=800&q=80",
     features: ["Терраса на крыше", "Восточный дизайн", "Mandarin Bar", "Спа-процедуры"],
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&q=80",
-      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80",
       "https://images.unsplash.com/photo-1559599238-1c99d946d8d5?w=1200&q=80",
       "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200&q=80",
       "https://images.unsplash.com/photo-1631049035182-249067d7618e?w=1200&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80"
+      "https://images.unsplash.com/photo-1587985064135-0366536eab42?w=1200&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
+      "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=1200&q=80"
     ]
   },
   {
@@ -200,17 +200,17 @@ const staticHotels: Hotel[] = [
     address: "Площадь Киевского Вокзала, 2",
     price: 38000,
     description: "Wellness СПА-центр с бассейнами и зонами релаксации. Идеально для восстановления сил после деловых встреч.",
-    image_url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
     features: ["Wellness СПА", "Бассейны", "Зоны релаксации", "Фитнес-центр"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80",
       "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=1200&q=80",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
-      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80",
-      "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=1200&q=80"
+      "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=80",
+      "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=1200&q=80",
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=80"
     ]
   },
   {
@@ -220,17 +220,17 @@ const staticHotels: Hotel[] = [
     address: "Смоленская ул., 5",
     price: 35000,
     description: "Бизнес-центр для деловых встреч. Современные конференц-залы и профессиональное обслуживание.",
-    image_url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
     features: ["Конференц-залы", "Бизнес-центр", "Переговорные", "Деловой лаундж"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80",
       "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=80",
       "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200&q=80",
-      "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=1200&q=80",
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1200&q=80"
+      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1200&q=80",
+      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=1200&q=80"
     ]
   },
   {
@@ -240,17 +240,17 @@ const staticHotels: Hotel[] = [
     address: "Рождественка ул., 3",
     price: 48000,
     description: "Исторический фасад начала XX века на улице Рождественка. Классическая архитектура и современный сервис.",
-    image_url: "https://images.unsplash.com/photo-1549294413-26f195200c16?w=800&q=80",
+    image_url: "https://images.unsplash.com/photo-1609766975528-20be4f0e0e8c?w=800&q=80",
     features: ["Исторический фасад", "Классическая архитектура", "Ресторан Savoy", "Консьерж-сервис"],
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1549294413-26f195200c16?w=1200&q=80",
-      "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=1200&q=80",
       "https://images.unsplash.com/photo-1609766975528-20be4f0e0e8c?w=1200&q=80",
       "https://images.unsplash.com/photo-1631049552240-59c37f38802b?w=1200&q=80",
       "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=80",
-      "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=80"
+      "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=80",
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=80",
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&q=80"
     ]
   }
 ];
