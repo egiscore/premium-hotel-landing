@@ -101,17 +101,17 @@ const staticHotels: Hotel[] = [
     address: "Неглинная ул., 4",
     price: 58000,
     description: "Фасад с видом на Неглинную. Легендарный Conservatory Lounge Bar с роялем и живой музыкой.",
-    image_url: "https://cdn.poehali.dev/files/HYATT_(3375505027).jpg",
+    image_url: "https://cdn.poehali.dev/files/channels4_profile.jpg",
     features: ["Conservatory Lounge", "Живая музыка", "Ararat Restaurant", "Wellness-центр"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://cdn.poehali.dev/files/channels4_profile.jpg",
       "https://cdn.poehali.dev/files/HYATT_(3375505027).jpg",
       "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=1200&q=80",
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
       "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200&q=80",
-      "https://images.unsplash.com/photo-1587985064135-0366536eab42?w=1200&q=80",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80"
+      "https://images.unsplash.com/photo-1587985064135-0366536eab42?w=1200&q=80"
     ]
   },
   {
