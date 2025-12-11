@@ -45,9 +45,12 @@ const staticHotels: Hotel[] = [
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
-      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800"
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80",
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&q=80",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80",
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&q=80",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80",
+      "https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?w=1200&q=80"
     ]
   },
   {
@@ -62,9 +65,12 @@ const staticHotels: Hotel[] = [
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
-      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800",
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800"
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80",
+      "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=1200&q=80",
+      "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&q=80",
+      "https://images.unsplash.com/photo-1631049035182-249067d7618e?w=1200&q=80",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=1200&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200&q=80"
     ]
   },
   {
@@ -79,9 +85,12 @@ const staticHotels: Hotel[] = [
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800",
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=80",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80",
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80",
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200&q=80",
+      "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=1200&q=80"
     ]
   },
   {
@@ -96,9 +105,12 @@ const staticHotels: Hotel[] = [
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80",
+      "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=1200&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
+      "https://images.unsplash.com/photo-1559599238-1c99d946d8d5?w=1200&q=80",
+      "https://images.unsplash.com/photo-1587985064135-0366536eab42?w=1200&q=80"
     ]
   },
   {
@@ -113,9 +125,12 @@ const staticHotels: Hotel[] = [
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
-      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80",
+      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=1200&q=80",
+      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1200&q=80",
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=80",
+      "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=80",
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=80"
     ]
   },
   {
@@ -130,9 +145,12 @@ const staticHotels: Hotel[] = [
     rating: 5,
     stars: 5,
     gallery: [
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800"
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80",
+      "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=1200&q=80",
+      "https://images.unsplash.com/photo-1609766975528-20be4f0e0e8c?w=1200&q=80",
+      "https://images.unsplash.com/photo-1631049552240-59c37f38802b?w=1200&q=80",
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&q=80",
+      "https://images.unsplash.com/photo-1549294413-26f195200c16?w=1200&q=80"
     ]
   }
 ];
