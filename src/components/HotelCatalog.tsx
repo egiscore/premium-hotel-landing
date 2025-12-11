@@ -161,17 +161,17 @@ const staticHotels: Hotel[] = [
     address: "Петровка ул., 7",
     price: 85000,
     description: "Итальянская роскошь в самом сердце Москвы. Золото и мрамор в спа-центре с эксклюзивными процедурами.",
-    image_url: "https://cdn.poehali.dev/files/b_a2c9601bbd29d926038921a5b7a2ff5f.jpg",
+    image_url: "https://cdn.poehali.dev/files/stella-di-mosca-hotelresidences-moskva-jk-2136945806-6.jpg",
     features: ["Bulgari SPA", "Золото и мрамор", "Итальянский ресторан", "Эксклюзивный дизайн"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://cdn.poehali.dev/files/stella-di-mosca-hotelresidences-moskva-jk-2136945806-6.jpg",
       "https://cdn.poehali.dev/files/b_a2c9601bbd29d926038921a5b7a2ff5f.jpg",
       "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80",
       "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&q=80",
       "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=1200&q=80",
-      "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80"
+      "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=80"
     ]
   },
   {
