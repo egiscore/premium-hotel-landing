@@ -419,7 +419,7 @@ const HotelCatalog = () => {
         </div>
       </div>
 
-      {bookingDialog.hotel && (
+      {bookingDialog.open && bookingDialog.hotel && (
         <BookingDialog
           open={bookingDialog.open}
           onOpenChange={(open) => setBookingDialog({ open, hotel: null })}
