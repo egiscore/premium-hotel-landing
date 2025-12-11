@@ -61,17 +61,17 @@ const staticHotels: Hotel[] = [
     address: "Охотный ряд, 2",
     price: 70000,
     description: "Историческое здание на Манежной площади. Президентские люксы с видом на Кремль и роскошный бассейн.",
-    image_url: "https://cdn.poehali.dev/files/scale_1200.jpg",
+    image_url: "https://cdn.poehali.dev/files/48058_0.jpg",
     features: ["Президентские люксы", "Бассейн", "Ресторан Quadrum", "Консьерж 24/7"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://cdn.poehali.dev/files/48058_0.jpg",
       "https://cdn.poehali.dev/files/scale_1200.jpg",
       "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80",
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80",
       "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80",
-      "https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?w=1200&q=80"
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80"
     ]
   },
   {
