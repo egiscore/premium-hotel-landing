@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import HotelGallery from "@/components/HotelGallery";
+import BookingDialog from "@/components/BookingDialog";
 
 interface Hotel {
   id: number;
@@ -261,6 +262,10 @@ const HotelCatalog = () => {
     min: number;
     max: number;
   } | null>(null);
+  const [bookingDialog, setBookingDialog] = useState<{
+    open: boolean;
+    hotel: Hotel | null;
+  }>({ open: false, hotel: null });
 
   const locations = [
     "Все",
@@ -402,25 +407,7 @@ const HotelCatalog = () => {
                     </div>
                     <Button
                       className="bg-gold hover:bg-gold/90 text-dark"
-                      onClick={() => {
-                        const contactSection =
-                          document.getElementById("contact");
-                        if (contactSection) {
-                          contactSection.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                          });
-                          setTimeout(() => {
-                            const messageInput = document.querySelector(
-                              'textarea[placeholder*="сообщение"]',
-                            ) as HTMLTextAreaElement;
-                            if (messageInput) {
-                              messageInput.value = `Здравствуйте! Хочу забронировать ${hotel.name}`;
-                              messageInput.focus();
-                            }
-                          }, 500);
-                        }
-                      }}
+                      onClick={() => setBookingDialog({ open: true, hotel })}
                     >
                       Забронировать
                     </Button>
@@ -431,6 +418,15 @@ const HotelCatalog = () => {
           )}
         </div>
       </div>
+
+      {bookingDialog.hotel && (
+        <BookingDialog
+          open={bookingDialog.open}
+          onOpenChange={(open) => setBookingDialog({ open, hotel: null })}
+          hotelName={bookingDialog.hotel.name}
+          pricePerNight={bookingDialog.hotel.price}
+        />
+      )}
     </section>
   );
 };
