@@ -220,20 +220,7 @@ const HotelCatalog = () => {
                             behavior: "smooth",
                             block: "start",
                           });
-                          setTimeout(() => {
-                            const messageInput = document.querySelector(
-                              'textarea[placeholder*="сообщение"]',
-                            ) as HTMLTextAreaElement;
-                            if (messageInput) {
-                              messageInput.value = `Здравствуйте! Хочу забронировать отель "${hotel.name}".`;
-                              messageInput.focus();
-                            }
-                          }, 500);
-                        }
-                      }}
-                    >
-                      Забронировать
-                    </Button>
+                          setTimeout(() =>Забронировать1</Button>
                   </div>
                 </CardContent>
               </Card>
