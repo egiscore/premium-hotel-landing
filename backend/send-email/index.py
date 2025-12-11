@@ -64,7 +64,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     # Создаем письмо
     msg = MIMEMultipart()
     msg['From'] = gmail_user
-    msg['To'] = gmail_user
+    msg['To'] = 'booking@booking.events'
     msg['Subject'] = f'Новая заявка с сайта от {name}'
     
     email_body = f'''
