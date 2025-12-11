@@ -130,7 +130,7 @@ const Index = () => {
                 Контакты
               </button>
               <Button className="bg-gold hover:bg-gold/90 text-dark">
-                +7 (495) 123-45-67
+                +7 (495) 179-74-44
               </Button>
             </div>
           </div>
@@ -298,7 +298,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-            <p>© 2024 Booking Premium Hotels Moscow. Все права защищены.</p>
+            <p>© 2024 Booking & Premium Hotels Moscow. Все права защищены.</p>
           </div>
         </div>
       </footer>
