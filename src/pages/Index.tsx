@@ -239,7 +239,7 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="text-xl font-bold mb-4 text-gold">
-                PREMIUM HOTELS
+                BOOKING & PREMIUM HOTELS
               </h3>
               <p className="text-gray-400 text-sm">
                 Бронирование премиум-отелей в Москве
