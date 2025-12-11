@@ -41,17 +41,17 @@ const staticHotels: Hotel[] = [
     address: "Тверская ул., 3",
     price: 65000,
     description: "Терраса O2 Lounge с панорамными видами на Кремль. Роскошные номера с эксклюзивным дизайном и безупречным сервисом.",
-    image_url: "https://cdn.poehali.dev/files/ritz-carlton-moscow-premier-luxury-hotel-red-square-russia-capital.jpg",
+    image_url: "https://cdn.poehali.dev/files/XL.png",
     features: ["O2 Lounge терраса", "Вид на Кремль", "Президентские люксы", "SPA-центр"],
     rating: 5,
     stars: 5,
     gallery: [
+      "https://cdn.poehali.dev/files/XL.png",
       "https://cdn.poehali.dev/files/ritz-carlton-moscow-premier-luxury-hotel-red-square-russia-capital.jpg",
       "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80",
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80",
       "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&q=80",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80",
-      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=1200&q=80"
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80"
     ]
   },
   {
