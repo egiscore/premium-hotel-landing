@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,9 +9,6 @@ import {
 } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import HotelGallery from "@/components/HotelGallery";
-
-const API_URL =
-  "https://functions.poehali.dev/82ea708f-5e97-4f6c-87b6-720c95d9d5db";
 
 interface Hotel {
   id: number;
@@ -35,9 +32,112 @@ interface Hotel {
   gallery?: string[];
 }
 
+const staticHotels: Hotel[] = [
+  {
+    id: 1,
+    name: "Grand Palace Moscow",
+    location: "Центр Москвы",
+    address: "Тверская ул., 15",
+    price: 45000,
+    description: "Легендарный отель с историей более 100 лет. Роскошные интерьеры, мраморные колонны и сервис мирового класса.",
+    image_url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+    features: ["Панорамный ресторан", "SPA-центр", "Личный дворецкий", "Трансфер"],
+    rating: 5,
+    stars: 5,
+    gallery: [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800"
+    ]
+  },
+  {
+    id: 2,
+    name: "Boutique Lux Arbat",
+    location: "Арбат",
+    address: "Старый Арбат, 27",
+    price: 38000,
+    description: "Бутик-отель в самом сердце культурного центра Москвы. Каждый номер — произведение искусства.",
+    image_url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+    features: ["Дизайнерские номера", "Арт-галерея", "Завтрак от шеф-повара", "Винный бар"],
+    rating: 5,
+    stars: 5,
+    gallery: [
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800",
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800"
+    ]
+  },
+  {
+    id: 3,
+    name: "Premium Towers",
+    location: "Москва-Сити",
+    address: "Пресненская наб., 12",
+    price: 52000,
+    description: "Небоскрёб роскоши с видом на Москву-реку. Идеально для деловых встреч на высшем уровне.",
+    image_url: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800",
+    features: ["Панорамный бассейн", "Переговорные залы", "Хелипад", "Консьерж 24/7"],
+    rating: 5,
+    stars: 5,
+    gallery: [
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800",
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
+    ]
+  },
+  {
+    id: 4,
+    name: "Crystal Garden Hotel",
+    location: "Патриаршие пруды",
+    address: "Малая Бронная, 18",
+    price: 41000,
+    description: "Элегантный отель у легендарных прудов. Тишина и комфорт в центре мегаполиса.",
+    image_url: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+    features: ["Зимний сад", "Библиотека", "Йога-студия", "Органический ресторан"],
+    rating: 5,
+    stars: 5,
+    gallery: [
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"
+    ]
+  },
+  {
+    id: 5,
+    name: "Imperial Suite Residence",
+    location: "Кутузовский проспект",
+    address: "Кутузовский пр-т, 45",
+    price: 48000,
+    description: "Резиденция для тех, кто ценит пространство и приватность. Апартаменты премиум-класса.",
+    image_url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+    features: ["Апартаменты до 200 м²", "Кухня от Miele", "Личный повар", "Домашний кинотеатр"],
+    rating: 5,
+    stars: 5,
+    gallery: [
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
+    ]
+  },
+  {
+    id: 6,
+    name: "Royal Heritage Moscow",
+    location: "Красная площадь",
+    address: "Никольская ул., 5",
+    price: 55000,
+    description: "Историческое здание XIX века с видом на Кремль. Царская роскошь и современный комфорт.",
+    image_url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
+    features: ["Вид на Кремль", "Антикварная мебель", "Музыкальный салон", "Русская баня"],
+    rating: 5,
+    stars: 5,
+    gallery: [
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800"
+    ]
+  }
+];
+
 const HotelCatalog = () => {
-  const [hotels, setHotels] = useState<Hotel[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedLocation, setSelectedLocation] = useState("Все");
   const [selectedPriceRange, setSelectedPriceRange] = useState<{
     min: number;
@@ -46,7 +146,7 @@ const HotelCatalog = () => {
 
   const locations = [
     "Все",
-    ...Array.from(new Set(hotels.map((h) => h.location))),
+    ...Array.from(new Set(staticHotels.map((h) => h.location))),
   ];
 
   const priceRanges = [
@@ -56,25 +156,7 @@ const HotelCatalog = () => {
     { label: "От 50 000 ₽", min: 50000, max: Infinity },
   ];
 
-  useEffect(() => {
-    fetchHotels();
-  }, []);
-
-  const fetchHotels = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(API_URL);
-      if (!response.ok) throw new Error("Failed to fetch hotels");
-      const data = await response.json();
-      setHotels(data);
-    } catch (error) {
-      console.error("Error fetching hotels:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filteredHotels = hotels.filter((hotel) => {
+  const filteredHotels = staticHotels.filter((hotel) => {
     const locationMatch =
       selectedLocation === "Все" || hotel.location === selectedLocation;
     const priceMatch =
@@ -83,16 +165,6 @@ const HotelCatalog = () => {
         hotel.price <= selectedPriceRange.max);
     return locationMatch && priceMatch;
   });
-
-  if (loading) {
-    return (
-      <section id="catalog" className="py-20 px-6 bg-gray-50">
-        <div className="container mx-auto max-w-6xl text-center">
-          <p className="text-lg text-gray-600">Загрузка каталога...</p>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="catalog" className="py-20 px-6 bg-gray-50">
@@ -220,7 +292,20 @@ const HotelCatalog = () => {
                             behavior: "smooth",
                             block: "start",
                           });
-                          setTimeout(() =>Забронировать1</Button>
+                          setTimeout(() => {
+                            const messageInput = document.querySelector(
+                              'textarea[placeholder*="сообщение"]',
+                            ) as HTMLTextAreaElement;
+                            if (messageInput) {
+                              messageInput.value = `Здравствуйте! Хочу забронировать ${hotel.name}`;
+                              messageInput.focus();
+                            }
+                          }, 500);
+                        }
+                      }}
+                    >
+                      Забронировать
+                    </Button>
                   </div>
                 </CardContent>
               </Card>

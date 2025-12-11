@@ -11,7 +11,6 @@ import HeroSection from "@/components/HeroSection";
 import HotelCatalog from "@/components/HotelCatalog";
 import SPASection from "@/components/SPASection";
 import ContactForm from "@/components/ContactForm";
-import { useNavigate } from "react-router-dom";
 
 const packages = [
   {
@@ -68,8 +67,6 @@ const reviews = [
 ];
 
 const Index = () => {
-  const navigate = useNavigate();
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {

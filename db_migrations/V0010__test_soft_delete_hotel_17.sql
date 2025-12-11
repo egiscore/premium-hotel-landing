@@ -1,1 +1,0 @@
-UPDATE t_p19515115_premium_hotel_landin.hotels SET is_active = FALSE WHERE id = 17;
